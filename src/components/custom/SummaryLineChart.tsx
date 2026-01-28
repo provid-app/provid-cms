@@ -10,7 +10,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { convertNumberToCurrency } from "@utils/helper/converter";
+import CustomTooltip from "./CustomTooltip";
 
 type Props = {
   chartData: EstimationChartType;
@@ -63,31 +63,9 @@ const SummaryLineChart = ({ chartData }: Props) => {
             <YAxis type="number" hide />
 
             <Tooltip
-              content={({ payload }) => {
-                return (
-                  <Flex className="px-4 py-2 bg-white rounded-lg shadow-[0px_4px_9px_0px_rgba(9,45,115,0.09)] gap-2">
-                    {payload.map((item, index) => (
-                      <Flex
-                        key={index.toString()}
-                        className="flex-row! items-center justify-between gap-5.5"
-                      >
-                        <Flex className="flex-row! items-center gap-2">
-                          <div
-                            className="size-4 rounded-sm"
-                            style={{ backgroundColor: item.stroke }}
-                          />
-
-                          <p className="text-body2 text-text">{item.name}</p>
-                        </Flex>
-
-                        <p className="text-body2 font-semibold text-title">
-                          {convertNumberToCurrency(item.value)}
-                        </p>
-                      </Flex>
-                    ))}
-                  </Flex>
-                );
-              }}
+              content={({ payload }) => (
+                <CustomTooltip payloadData={payload} type="currency" />
+              )}
             />
 
             <Line

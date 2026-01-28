@@ -9,6 +9,7 @@ import {
 } from "recharts";
 import Flex from "./Flex";
 import type { ChartBoxType } from "types/page.type";
+import CustomTooltip from "./CustomTooltip";
 
 type Props = {
   title: string;
@@ -85,7 +86,25 @@ const LeaderboardChart = ({
                 tickMargin={0}
               />
 
-              <Tooltip cursor={false} />
+              <Tooltip
+                cursor={false}
+                content={({ payload, activeIndex }) => {
+                  console.log(activeIndex);
+
+                  return (
+                    <CustomTooltip
+                      payloadData={payload}
+                      type="number"
+                      mode="bar"
+                      barColor={
+                        activeIndex && Number(activeIndex) === 0
+                          ? "#1069C5"
+                          : "#9FC3E8"
+                      }
+                    />
+                  );
+                }}
+              />
 
               <Bar
                 dataKey="value"

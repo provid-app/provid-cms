@@ -1,6 +1,7 @@
 import type { ChartBoxType } from "types/page.type";
 import Flex from "./Flex";
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import CustomTooltip from "./CustomTooltip";
 
 type Props = {
   title: string;
@@ -31,7 +32,15 @@ const PieChartBox = ({
         <Flex className="items-center">
           <ResponsiveContainer width="100%" height={214}>
             <PieChart>
-              <Tooltip />
+              <Tooltip
+                content={({ payload }) => (
+                  <CustomTooltip
+                    payloadData={payload}
+                    type="number"
+                    mode="pie"
+                  />
+                )}
+              />
 
               <Pie
                 data={chartData}
@@ -39,8 +48,8 @@ const PieChartBox = ({
                 outerRadius="100%"
                 innerRadius="70%"
               >
-                <Cell className="fill-primary" />
-                <Cell className="fill-brand-second" />
+                <Cell fill="#51a933" />
+                <Cell fill="#b9ddad" />
               </Pie>
             </PieChart>
           </ResponsiveContainer>
