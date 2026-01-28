@@ -29,8 +29,8 @@ jobs:
         with:
           push: true
           tags: |
-            ghcr.io/$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]'):latest
-            ghcr.io/$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]'):${{ github.sha }}
+            ghcr.io/${{ lower(github.repository) }}:latest
+            ghcr.io/${{ lower(github.repository) }}:${{ github.sha }}
 
       - name: Deploy to VPS
         uses: appleboy/ssh-action@v1.0.0
