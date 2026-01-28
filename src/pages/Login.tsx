@@ -1,0 +1,44 @@
+import { AuthVector, Logo } from "@assets/index";
+import { CustomButton, Flex } from "@components/custom";
+import { FormList } from "@components/layout";
+import { loginForm } from "@utils/constant/form.data";
+import { loginValidator } from "@utils/validator/auth.validator";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const Login = () => {
+  const { control } = useForm({
+    resolver: zodResolver(loginValidator),
+    defaultValues: loginForm.defaultValues,
+  });
+
+  return (
+    <Flex className="flex-row flex-1 p-6">
+      <Flex className="flex-1 max-w-158.75 h-[calc(100dvh-48px)]">
+        <AuthVector className="size-full" />
+      </Flex>
+
+      <Flex className="flex-1 items-center justify-center gap-6">
+        <Logo width={32} height={32} />
+
+        <form className="flex flex-col w-full max-w-87.5 gap-6">
+          <Flex className="items-center py-2 gap-1">
+            <p className="text-subtitle font-semibold text-foreground">
+              Selamat Datang
+            </p>
+
+            <p className="text-body2 text-muted-foreground">
+              Masukkan email untuk akses Provid Dashboard
+            </p>
+          </Flex>
+
+          <FormList control={control} listData={loginForm.inputs} />
+
+          <CustomButton label="Masuk" />
+        </form>
+      </Flex>
+    </Flex>
+  );
+};
+
+export default Login;

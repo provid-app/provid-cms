@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-title: var(--color-title);
+  --color-text: var(--color-text);
+  --color-inactive: var(--color-inactive);
+  --color-disabled: var(--color-disabled);
+  --color-border: var(--color-border);
+  --color-second: var(--color-second);
+  --color-main: var(--color-main);
+  --color-primary: var(--color-primary);
+  --color-brand-second: var(--color-brand-second);
+  --color-brand-main: var(--color-brand-main);
+  --color-foreground: var(--color-foreground);
+  --color-muted-foreground: var(--color-muted-foreground);
+  --color-relative: var(--color-relative);
+  --default-font-family: "Plus Jakarta Sans";
+  --text-headline: 48px;
+  --text-headline--line-height: 120%;
+  --text-headline--letter-spacing: -0.5px;
+  --text-title: 32px;
+  --text-title--line-height: 140%;
+  --text-title--letter-spacing: -0.25px;
+  --text-subtitle: 24px;
+  --text-subtitle--line-height: 140%;
+  --text-subtitle--letter-spacing: 0px;
+  --text-heading: 20px;
+  --text-heading--line-height: 140%;
+  --text-heading--letter-spacing: 0px;
+  --text-subheading: 18px;
+  --text-subheading--line-height: 140%;
+  --text-subheading--letter-spacing: 0px;
+  --text-body1: 16px;
+  --text-body1--line-height: 140%;
+  --text-body1--letter-spacing: 0px;
+  --text-body2: 14px;
+  --text-body2--line-height: 140%;
+  --text-body2--letter-spacing: 0px;
+  --text-caption: 12px;
+  --text-caption--line-height: 140%;
+  --text-caption--letter-spacing: 0px;
+  --text-metadata: 10px;
+  --text-metadata--line-height: 140%;
+  --text-metadata--letter-spacing: 0px;
+}
+
+:root {
+  --color-title: #071220;
+  --color-text: #646b74;
+  --color-inactive: #83888f;
+  --color-disabled: #c4cad1;
+  --color-border: #e1e5e8;
+  --color-second: #f8f8f9;
+  --color-main: #ffffff;
+  --color-primary: #51a933;
+  --color-brand-second: #b9ddad;
+  --color-brand-main: #dceed6;
+  --color-foreground: #09090b;
+  --color-muted-foreground: #71717a;
+  --color-relative: #26303c;
+}
+
+h1 {
+  @apply text-headline;
+}
+
+h2 {
+  @apply text-heading;
+}
+
+h3 {
+  @apply text-subheading;
+}
+
+input {
+  @apply text-body2 text-title outline-none;
+}
