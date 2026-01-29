@@ -6,6 +6,8 @@ import {
 } from "@tabler/icons-react";
 import { AnimatePresence, motion } from "motion/react";
 import {
+  useEffect,
+  useRef,
   useState,
   type ForwardRefExoticComponent,
   type RefAttributes,
@@ -29,8 +31,29 @@ const DropdownFilter = ({
 
   const Icon = icon;
 
+  const wrapperRef = useRef<HTMLButtonElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        !wrapperRef.current?.contains(event.target as Node) &&
+        !dropdownRef.current?.contains(event.target as Node)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("pointerdown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <ButtonFlex
+      ref={wrapperRef}
       className={`relative border border-border px-3 py-2 rounded-lg ${mode === "bold" ? "text-title" : "text-text"} gap-2 hover:bg-border transition-colors duration-300`}
       onClick={() => setShowDropdown((prev) => !prev)}
     >
@@ -49,6 +72,7 @@ const DropdownFilter = ({
       <AnimatePresence>
         {showDropdown && (
           <motion.div
+            ref={dropdownRef}
             className="flex flex-col min-w-39 absolute bg-white border border-border rounded-lg shadow-md right-0 top-[calc(100%+5px)] origin-top-right z-50 overflow-hidden"
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
