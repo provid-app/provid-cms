@@ -3,12 +3,16 @@ import type { IconProps } from "@tabler/icons-react";
 import type { ForwardRefExoticComponent } from "react";
 import type { To } from "react-router";
 
-export type SidebarType = {
+export type SidebarSubType = {
   label: string;
+  dest: To;
+};
+
+export type SidebarType = SidebarSubType & {
   icon: ForwardRefExoticComponent<
     IconProps & React.RefAttributes<SVGSVGElement>
   >;
-  dest: To;
+  sub?: SidebarSubType[];
 };
 
 export type KPIType = {

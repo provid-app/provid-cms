@@ -17,6 +17,16 @@ export const sidebarData: SidebarType[] = [
     label: "Analitik",
     icon: IconChartPie,
     dest: "/analytic",
+    sub: [
+      {
+        label: "Misi",
+        dest: "/mission",
+      },
+      {
+        label: "Pengguna",
+        dest: "/user",
+      },
+    ],
   },
   {
     label: "Kelola",

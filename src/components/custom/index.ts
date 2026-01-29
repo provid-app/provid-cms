@@ -6,3 +6,4 @@ export { default as PieChartBox } from "./PieChartBox";
 export { default as LeaderboardChart } from "./LeaderboardChart";
 export { default as SummaryLineChart } from "./SummaryLineChart";
 export { default as EstimationValueBox } from "./EstimationValueBox";
+export { default as DropdownFilter } from "./DropdownFilter";

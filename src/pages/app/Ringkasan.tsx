@@ -6,8 +6,12 @@ import {
   SummaryLineChart,
 } from "@components/custom";
 import useSummaryController from "@controllers/summary.controller";
+import { useCategoryFilter, useLeaderboardFilter } from "@stores/page.store";
 
 const Ringkasan = () => {
+  const categoryFilter = useCategoryFilter();
+  const leaedrboardFilter = useLeaderboardFilter();
+
   const {
     useGetSummaryKPIService,
     useGetMissionAnalyticService,
@@ -38,6 +42,7 @@ const Ringkasan = () => {
           chartData={missionAnalytic}
           footnote1="Misi iklan mendominasi dengan 58% dari total aktivitas"
           footnote2="Perbandingan jenis misi Ads dan App dalam performa."
+          filterData={categoryFilter}
         />
 
         <LeaderboardChart
@@ -46,6 +51,7 @@ const Ringkasan = () => {
           chartData={missionLeaderboard}
           footnote1="5 misi teratas menyumbang 42% dari total penyelesaian bulan ini"
           footnote2="Menampilkan misi dengan jumlah penyelesaian tertinggi."
+          filterData={leaedrboardFilter}
         />
       </div>
 

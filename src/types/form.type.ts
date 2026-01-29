@@ -1,3 +1,8 @@
+export type DropdownType = {
+  label: string;
+  value: string;
+};
+
 export type InputType = {
   type: "text" | "password";
   name: string;

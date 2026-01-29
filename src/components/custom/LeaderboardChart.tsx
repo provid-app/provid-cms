@@ -10,6 +10,8 @@ import {
 import Flex from "./Flex";
 import type { ChartBoxType } from "types/page.type";
 import CustomTooltip from "./CustomTooltip";
+import type { ChartFilterStateType } from "types/state.type";
+import DropdownFilter from "./DropdownFilter";
 
 type Props = {
   title: string;
@@ -17,6 +19,7 @@ type Props = {
   chartData: ChartBoxType[];
   footnote1: string;
   footnote2: string;
+  filterData: ChartFilterStateType;
 };
 
 const LeaderboardChart = ({
@@ -25,9 +28,8 @@ const LeaderboardChart = ({
   chartData,
   footnote1,
   footnote2,
+  filterData,
 }: Props) => {
-  console.log(chartData);
-
   return (
     <Flex className="border border-border rounded-xl">
       <Flex className="px-3 py-2.5 border-b border-b-border">
@@ -35,8 +37,10 @@ const LeaderboardChart = ({
       </Flex>
 
       <Flex className="flex-1 p-4 gap-6">
-        <Flex className="flex-row! items-center">
+        <Flex className="flex-row! items-center justify-between">
           <p className="text-body1 font-semibold text-title">{subTitle}</p>
+
+          <DropdownFilter filterData={filterData} />
         </Flex>
 
         <Flex className="flex-1">
@@ -89,8 +93,6 @@ const LeaderboardChart = ({
               <Tooltip
                 cursor={false}
                 content={({ payload, activeIndex }) => {
-                  console.log(activeIndex);
-
                   return (
                     <CustomTooltip
                       payloadData={payload}
