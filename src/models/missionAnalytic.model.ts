@@ -6,3 +6,13 @@ export interface MissionKPIDTO {
   mission_complete_rate: KPIDTO;
   avg_mission_success: KPIDTO;
 }
+
+export interface MissionTrendDTO {
+  day: string;
+  completed: number;
+}
+
+export interface MissionCompletedDTO {
+  mission_name: string;
+  completed: number;
+}

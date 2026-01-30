@@ -1,5 +1,5 @@
 import { AppLayout } from "@components/layout";
-import { MissionAnalytic } from "@pages/app/analytic";
+import { MissionAnalytic, UserAnalytic } from "@pages/app/analytic";
 import Ringkasan from "@pages/app/Ringkasan";
 import { Navigate, Route, Routes } from "react-router";
 
@@ -7,6 +7,7 @@ const AnalyticRoute = () => {
   return (
     <Routes>
       <Route path="/mission" element={<MissionAnalytic />} />
+      <Route path="/user" element={<UserAnalytic />} />
       <Route path="*" element={<Navigate to="/analytic/mission" />} />
     </Routes>
   );

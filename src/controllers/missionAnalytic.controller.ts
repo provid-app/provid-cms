@@ -1,5 +1,9 @@
-import { generateMissionKPI } from "@utils/data/missionAnalytic.dummy";
-import type { KPICardType } from "types/page.type";
+import {
+  generateMissionCompleted,
+  generateMissionKPI,
+  generateMissionTrend,
+} from "@utils/data/missionAnalytic.dummy";
+import type { ChartBoxType, KPICardType } from "types/page.type";
 
 const useMissionAnalyticController = () => {
   const useGetMissionKPIService = () => {
@@ -61,8 +65,42 @@ const useMissionAnalyticController = () => {
     };
   };
 
+  const useGetMissionTrendService = () => {
+    const missionTrend = generateMissionTrend();
+
+    let finalData: ChartBoxType[] = [];
+
+    finalData = missionTrend.map((item) => ({
+      name: item.day,
+      value: item.completed,
+    }));
+
+    return {
+      finalData,
+    };
+  };
+
+  const useGetMissionCompletedService = () => {
+    const missionCompleted = generateMissionCompleted();
+
+    let finalData: ChartBoxType[] = [];
+
+    finalData = missionCompleted
+      .map((item) => ({
+        name: item.mission_name,
+        value: item.completed,
+      }))
+      .sort((a, b) => b.value - a.value);
+
+    return {
+      finalData,
+    };
+  };
+
   return {
     useGetMissionKPIService,
+    useGetMissionTrendService,
+    useGetMissionCompletedService,
   };
 };
 

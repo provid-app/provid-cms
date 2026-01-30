@@ -17,6 +17,11 @@ export const generateBreadcrumb = (pathname: string) => {
         dest: "/analytic/mission",
         label: "Misi",
       });
+    } else if (pathname.includes("/user")) {
+      breadcrumb.push({
+        dest: "/analytic/user",
+        label: "Pengguna",
+      });
     }
   }
 

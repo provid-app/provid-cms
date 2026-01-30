@@ -81,7 +81,7 @@ const KPICard = ({ cardData }: Props) => {
 
       <motion.h3 className="font-bold text-title">{formatted}</motion.h3>
 
-      <Flex className="flex-row! items-center gap-1 px-2 py-[2.5px] border border-border rounded-lg text-title">
+      <Flex className="flex-row! items-center gap-1 px-2 py-[2.5px] border border-border rounded-lg text-title self-start">
         {cardData.percent_from_last < 0 ? (
           <IconTrendingDown size={16} stroke={1} />
         ) : (

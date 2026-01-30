@@ -7,3 +7,4 @@ export { default as LeaderboardChart } from "./LeaderboardChart";
 export { default as SummaryLineChart } from "./SummaryLineChart";
 export { default as EstimationValueBox } from "./EstimationValueBox";
 export { default as DropdownFilter } from "./DropdownFilter";
+export { default as LineChartBox } from "./LineChartBox";

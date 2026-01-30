@@ -12,6 +12,7 @@ import type { ChartBoxType } from "types/page.type";
 import CustomTooltip from "./CustomTooltip";
 import type { ChartFilterStateType } from "types/state.type";
 import DropdownFilter from "./DropdownFilter";
+import { convertNumberFormat } from "@utils/helper/converter";
 
 type Props = {
   title: string;
@@ -20,6 +21,7 @@ type Props = {
   footnote1: string;
   footnote2: string;
   filterData: ChartFilterStateType;
+  xAxisType?: "default" | "percent";
 };
 
 const LeaderboardChart = ({
@@ -29,6 +31,7 @@ const LeaderboardChart = ({
   footnote1,
   footnote2,
   filterData,
+  xAxisType = "default",
 }: Props) => {
   return (
     <Flex className="border border-border rounded-xl">
@@ -43,7 +46,7 @@ const LeaderboardChart = ({
           <DropdownFilter filterData={filterData} />
         </Flex>
 
-        <Flex className="flex-1">
+        <Flex className="flex-1 h-55">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={chartData}
@@ -56,6 +59,9 @@ const LeaderboardChart = ({
                 tick={{ className: "text-caption" }}
                 axisLine={false}
                 tickLine={false}
+                tickFormatter={(value) =>
+                  `${convertNumberFormat(value)}${xAxisType === "percent" ? "%" : ""}`
+                }
               />
 
               <YAxis
@@ -96,7 +102,7 @@ const LeaderboardChart = ({
                   return (
                     <CustomTooltip
                       payloadData={payload}
-                      type="number"
+                      type={xAxisType === "percent" ? "percent" : "number"}
                       mode="bar"
                       barColor={
                         activeIndex && Number(activeIndex) === 0

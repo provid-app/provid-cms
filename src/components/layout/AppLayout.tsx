@@ -126,7 +126,7 @@ const AppLayout = () => {
                                 : "bg-white text-inactive"
                             } hover:text-primary hover:bg-brand-main hover:font-semibold transition-all duration-300`}
                           >
-                            <p className="text-sm font-medium">{sub.label}</p>
+                            <p className="text-body2">{sub.label}</p>
                           </Link>
 
                           <AnimatePresence>

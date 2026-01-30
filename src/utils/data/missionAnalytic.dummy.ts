@@ -1,5 +1,10 @@
 import { faker } from "@faker-js/faker";
-import type { MissionKPIDTO } from "@models/missionAnalytic.model";
+import type {
+  MissionCompletedDTO,
+  MissionKPIDTO,
+  MissionTrendDTO,
+} from "@models/missionAnalytic.model";
+import { DAY } from "@utils/constant/page.data";
 
 export const generateMissionKPI = (): MissionKPIDTO => ({
   total_active_mission: {
@@ -35,3 +40,15 @@ export const generateMissionKPI = (): MissionKPIDTO => ({
     }),
   },
 });
+
+export const generateMissionTrend = (): MissionTrendDTO[] =>
+  DAY.map((item) => ({
+    day: item,
+    completed: faker.number.int({ min: 1, max: 100 }),
+  }));
+
+export const generateMissionCompleted = (): MissionCompletedDTO[] =>
+  Array.from({ length: 5 }, () => ({
+    mission_name: faker.commerce.productName(),
+    completed: faker.number.int({ min: 1, max: 100 }),
+  }));

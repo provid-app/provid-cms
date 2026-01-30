@@ -5,21 +5,7 @@ import type {
   SummaryKPIDTO,
 } from "@models/summary.model";
 import { faker } from "@faker-js/faker";
-
-export const MONTH = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "Mei",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Okt",
-  "Nov",
-  "Des",
-];
+import { MONTH } from "@utils/constant/page.data";
 
 export const generateSummaryKPI = (): SummaryKPIDTO => ({
   total_users: {

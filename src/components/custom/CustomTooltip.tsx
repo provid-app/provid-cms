@@ -6,7 +6,7 @@ import Flex from "./Flex";
 
 type Props = {
   payloadData: readonly any[];
-  type: "number" | "currency";
+  type: "number" | "currency" | "percent";
   mode?: "pie" | "bar" | "default";
   barColor?: string;
 };
@@ -46,7 +46,7 @@ const CustomTooltip = ({
             <p className="text-body2 font-semibold text-title">
               {type === "currency"
                 ? convertNumberToCurrency(item.value)
-                : convertNumberFormat(item.value)}
+                : `${convertNumberFormat(item.value)}${type === "percent" ? "%" : ""}`}
             </p>
           </Flex>
         );
