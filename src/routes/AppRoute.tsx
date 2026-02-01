@@ -1,5 +1,6 @@
 import { AppLayout } from "@components/layout";
 import { MissionAnalytic, UserAnalytic } from "@pages/app/analytic";
+import ManageCategory from "@pages/app/manage/ManageCategory";
 import Ringkasan from "@pages/app/Ringkasan";
 import { Navigate, Route, Routes } from "react-router";
 
@@ -13,12 +14,22 @@ const AnalyticRoute = () => {
   );
 };
 
+const ManageRoute = () => {
+  return (
+    <Routes>
+      <Route path="/category" element={<ManageCategory />} />
+      <Route path="*" element={<Navigate to="/manage/category" />} />
+    </Routes>
+  );
+};
+
 const AppRoute = () => {
   return (
     <Routes>
       <Route element={<AppLayout />}>
         <Route path="/" element={<Ringkasan />} />
         <Route path="/analytic/*" element={<AnalyticRoute />} />
+        <Route path="/manage/*" element={<ManageRoute />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>

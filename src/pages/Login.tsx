@@ -5,9 +5,13 @@ import { loginForm } from "@utils/constant/form.data";
 import { loginValidator } from "@utils/validator/auth.validator";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAuth, useToast } from "@stores/page.store";
 
 const Login = () => {
-  const { control } = useForm({
+  const addToken = useAuth((state) => state.addToken);
+  const showToast = useToast((state) => state.onShow);
+
+  const { control, handleSubmit } = useForm({
     resolver: zodResolver(loginValidator),
     defaultValues: loginForm.defaultValues,
   });
@@ -21,7 +25,20 @@ const Login = () => {
       <Flex className="flex-1 items-center justify-center gap-6">
         <Logo width={32} height={32} />
 
-        <form className="flex flex-col w-full max-w-87.5 gap-6">
+        <form
+          className="flex flex-col w-full max-w-87.5 gap-6"
+          onSubmit={handleSubmit((data) => {
+            if (
+              data.email === "halo@provid.id" &&
+              data.password === "GangAbbah#34A"
+            ) {
+              showToast("success", "Login berhasil!");
+              addToken("token");
+            } else {
+              showToast("failed", "Email atau Password salah!");
+            }
+          })}
+        >
           <Flex className="items-center py-2 gap-1">
             <p className="text-subtitle font-semibold text-foreground">
               Selamat Datang
@@ -34,7 +51,7 @@ const Login = () => {
 
           <FormList control={control} listData={loginForm.inputs} />
 
-          <CustomButton label="Masuk" />
+          <CustomButton type="submit" label="Masuk" />
         </form>
       </Flex>
     </Flex>

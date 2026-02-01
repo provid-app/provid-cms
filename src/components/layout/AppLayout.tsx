@@ -25,7 +25,7 @@ const AppLayout = () => {
   const crumbs = generateBreadcrumb(pathname);
 
   return (
-    <Flex className="flex-1 flex-row!">
+    <Flex className="relative flex-1 flex-row!">
       <Flex className="w-75 border-r border-r-border">
         <Flex className="px-6 h-18 justify-center border-b border-b-border">
           <LogoFull width={119.25} height={24} />
@@ -121,7 +121,7 @@ const AppLayout = () => {
                             key={index.toString()}
                             to={`${item.dest}${sub.dest}`}
                             className={`px-3 py-1.25 rounded-lg ${
-                              pathname.includes(sub.dest as string)
+                              pathname.includes(`${item.dest}${sub.dest}`)
                                 ? "bg-brand-main text-primary font-semibold"
                                 : "bg-white text-inactive"
                             } hover:text-primary hover:bg-brand-main hover:font-semibold transition-all duration-300`}
@@ -130,7 +130,7 @@ const AppLayout = () => {
                           </Link>
 
                           <AnimatePresence>
-                            {pathname.includes(sub.dest as string) && (
+                            {pathname.includes(`${item.dest}${sub.dest}`) && (
                               <motion.div
                                 className="absolute h-full top-0 w-0.5 bg-primary -left-2.5"
                                 initial={{ height: 0 }}
@@ -204,12 +204,14 @@ const AppLayout = () => {
             </Flex>
           </Flex>
 
-          <DropdownFilter
-            filterData={chartFilter}
-            icon={IconCalendarWeek}
-            mode="bold"
-            position="prefix"
-          />
+          {pathname === "/" || pathname.includes("/analytic") ? (
+            <DropdownFilter
+              filterData={chartFilter}
+              icon={IconCalendarWeek}
+              mode="bold"
+              position="prefix"
+            />
+          ) : null}
         </Flex>
 
         <Outlet />

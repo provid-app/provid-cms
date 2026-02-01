@@ -23,7 +23,7 @@ const CustomButton = ({
   return (
     <button
       type={type}
-      className={`flex items-center justify-center rounded-xl active:ring-4 ${size === "md" ? "p-2" : "p-3"} ${mode === "primary" ? "bg-primary text-white active:ring-brand-main" : mode === "secondary" ? "bg-brand-main text-primary active:ring-brand-second" : `bg-transparent text-title ${mode === "outline" && "border border-border hover:border-brand-main"} hover:bg-brand-main hover:text-primary transition-colors duration-300 active:ring-second gap-2`}`}
+      className={`flex items-center justify-center rounded-xl active:ring-4 ${size === "md" ? "py-2" : "py-3"} ${mode === "primary" ? "bg-primary text-white active:ring-brand-main" : mode === "secondary" ? "bg-brand-main text-primary active:ring-brand-second" : `bg-transparent text-title ${mode === "outline" && "border border-border hover:border-brand-main"} hover:bg-brand-main hover:text-primary transition-colors duration-300 active:ring-second`} gap-2 px-3.5`}
     >
       {Icon && <Icon size={size === "md" ? 16 : 20} />}
 

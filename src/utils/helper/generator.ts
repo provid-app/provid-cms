@@ -23,6 +23,18 @@ export const generateBreadcrumb = (pathname: string) => {
         label: "Pengguna",
       });
     }
+  } else if (pathname.includes("/manage")) {
+    breadcrumb.push({
+      dest: "/manage",
+      label: "Kelola",
+    });
+
+    if (pathname.includes("/category")) {
+      breadcrumb.push({
+        dest: "/category",
+        label: "Kategori",
+      });
+    }
   }
 
   if (pathname.includes("/edit")) {

@@ -1,5 +1,15 @@
-import type { ChartFilterStateType } from "types/state.type";
+import type {
+  AuthStateType,
+  ChartFilterStateType,
+  ToastStateType,
+} from "types/state.type";
 import { create } from "zustand";
+
+export const useAuth = create<AuthStateType>((set) => ({
+  token: null,
+  addToken: (token) => set({ token }),
+  resetToken: () => set({ token: null }),
+}));
 
 export const useChartFilter = create<ChartFilterStateType>((set) => ({
   data: {
@@ -65,4 +75,30 @@ export const useLeaderboardFilter = create<ChartFilterStateType>((set) => ({
     },
   ],
   onChange: (data) => set({ data }),
+}));
+
+export const useUserFilter = create<ChartFilterStateType>((set) => ({
+  data: {
+    label: "Berdasarkan total pengguna",
+    value: "users",
+  },
+  list: [
+    {
+      label: "Berdasarkan total pengguna",
+      value: "users",
+    },
+    {
+      label: "Berdasarkan penyelesaian misi terbanyak",
+      value: "missions",
+    },
+  ],
+  onChange: (data) => set({ data }),
+}));
+
+export const useToast = create<ToastStateType>((set) => ({
+  show: false,
+  type: "failed",
+  message: "",
+  onShow: (type, message) => set({ show: true, type, message }),
+  onHide: () => set({ show: false, type: "failed", message: "" }),
 }));

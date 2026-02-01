@@ -5,7 +5,7 @@ import {
   IconLayoutDashboard,
   IconReplaceUser,
 } from "@tabler/icons-react";
-import type { SidebarType } from "types/page.type";
+import type { SidebarType, TableHeaderType } from "types/page.type";
 
 export const MONTH = [
   "Jan",
@@ -23,6 +23,10 @@ export const MONTH = [
 ];
 
 export const DAY = ["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"];
+
+export const MISSION_COUNT = ["1 Misi", "2-5 Misi", "6-10 Misi", "> 10 Misi"];
+
+export const AGE = ["< 17", "17-25", "26-35", "36-45", "46-55", "> 55"];
 
 export const sidebarData: SidebarType[] = [
   {
@@ -49,6 +53,20 @@ export const sidebarData: SidebarType[] = [
     label: "Kelola",
     icon: IconEdit,
     dest: "/manage",
+    sub: [
+      {
+        label: "Kategori",
+        dest: "/category",
+      },
+      {
+        label: "Misi",
+        dest: "/mission",
+      },
+      {
+        label: "Segmen",
+        dest: "/segment",
+      },
+    ],
   },
   {
     label: "Transaksi",
@@ -61,3 +79,21 @@ export const sidebarData: SidebarType[] = [
     dest: "/notification",
   },
 ];
+
+export const categoryHeaderData: TableHeaderType = {
+  withAction: true,
+  header: [
+    {
+      label: "Kategori",
+      type: "text",
+    },
+    {
+      label: "Simbol",
+      type: "text",
+    },
+    {
+      label: "Status",
+      type: "text",
+    },
+  ],
+};

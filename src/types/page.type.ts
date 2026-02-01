@@ -29,9 +29,20 @@ export type KPICardType = KPIType & {
 export type ChartBoxType = {
   name: string;
   value: number;
+  isMax?: boolean;
 };
 
 export type EstimationChartType = {
   kpi: KPIType[];
   data: FinancialEstimationDataDTO[];
+};
+
+export type RowType = {
+  label: string;
+  type: "text";
+};
+
+export type TableHeaderType = {
+  withAction: boolean;
+  header: RowType[];
 };
