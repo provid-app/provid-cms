@@ -39,10 +39,24 @@ export type EstimationChartType = {
 
 export type RowType = {
   label: string;
-  type: "text";
+  type: "text" | "image" | "switch";
+  onSwitch?: () => void;
 };
 
 export type TableHeaderType = {
   withAction: boolean;
   header: RowType[];
+};
+
+export type RowActionType = {
+  type: "edit" | "delete" | "nav";
+  icon: ForwardRefExoticComponent<
+    IconProps & React.RefAttributes<SVGSVGElement>
+  >;
+  onClick: () => void;
+};
+
+export type TableBodyType = {
+  row: RowType[];
+  action?: RowActionType[];
 };

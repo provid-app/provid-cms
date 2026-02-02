@@ -11,3 +11,4 @@ export { default as LineChartBox } from "./LineChartBox";
 export { default as BarChartBox } from "./BarChartBox";
 export { default as Toast } from "./Toast";
 export { default as SearchInput } from "./SearchInput";
+export { default as CustomSwitch } from "./CustomSwitch";
