@@ -39,7 +39,18 @@ export type EstimationChartType = {
 
 export type RowType = {
   label: string;
-  type: "text" | "image" | "switch";
+  type:
+    | "text"
+    | "image"
+    | "switch"
+    | "draft"
+    | "arrange"
+    | "publish"
+    | "coin"
+    | "success"
+    | "progress"
+    | "failed";
+  sortable?: string;
   onSwitch?: () => void;
 };
 

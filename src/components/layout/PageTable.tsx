@@ -1,4 +1,9 @@
 import { CustomSwitch, Flex } from "@components/custom";
+import {
+  IconCalendarWeek,
+  IconCircleDashed,
+  IconSend,
+} from "@tabler/icons-react";
 import type { TableBodyType, TableHeaderType } from "types/page.type";
 
 type Props = {
@@ -35,7 +40,7 @@ const PageTable = ({ headerData, bodyData }: Props) => {
               {item.row.map((item2, index2) => (
                 <td
                   key={index2.toString()}
-                  className="px-4 py-2.5 border-b border-b-border"
+                  className="px-4 py-2.5 border-b border-b-border text-left"
                 >
                   {item2.type === "image" ? (
                     <img src={item2.label} className="size-5" />
@@ -44,8 +49,26 @@ const PageTable = ({ headerData, bodyData }: Props) => {
                       label={item2.label}
                       value={item2.label === "Aktif"}
                     />
-                  ) : (
+                  ) : item2.type === "text" ? (
                     <p className="text-body2 text-title">{item2.label}</p>
+                  ) : (
+                    <Flex className="items-start">
+                      <Flex
+                        className={`flex-row! items-center gap-2 px-2 py-1 border rounded-[5px] ${item2.type === "publish" ? "text-primary bg-brand-main border-brand-second" : item2.type === "arrange" ? "text-blue-primary bg-blue-main border-blue-second" : "text-text bg-second border-border"}`}
+                      >
+                        {item2.type === "publish" ? (
+                          <IconSend size={16} />
+                        ) : item2.type === "arrange" ? (
+                          <IconCalendarWeek size={16} />
+                        ) : (
+                          <IconCircleDashed size={16} />
+                        )}
+
+                        <p className="text-body2 font-semibold">
+                          {item2.label}
+                        </p>
+                      </Flex>
+                    </Flex>
                   )}
                 </td>
               ))}

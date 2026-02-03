@@ -1,6 +1,6 @@
 import { AppLayout } from "@components/layout";
 import { MissionAnalytic, UserAnalytic } from "@pages/app/analytic";
-import ManageCategory from "@pages/app/manage/ManageCategory";
+import { ManageCategory, ManageMission } from "@pages/app/manage";
 import Ringkasan from "@pages/app/Ringkasan";
 import { Navigate, Route, Routes } from "react-router";
 
@@ -18,6 +18,7 @@ const ManageRoute = () => {
   return (
     <Routes>
       <Route path="/category" element={<ManageCategory />} />
+      <Route path="/mission" element={<ManageMission />} />
       <Route path="*" element={<Navigate to="/manage/category" />} />
     </Routes>
   );

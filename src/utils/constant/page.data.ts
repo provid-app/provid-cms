@@ -97,3 +97,34 @@ export const categoryHeaderData: TableHeaderType = {
     },
   ],
 };
+
+export const missionHeaderData: TableHeaderType = {
+  withAction: true,
+  header: [
+    {
+      label: "Nama Misi",
+      type: "text",
+      sortable: "mission_name",
+    },
+    {
+      label: "Status",
+      type: "text",
+      sortable: "mission_status",
+    },
+    {
+      label: "Tanggal Publikasi",
+      type: "text",
+      sortable: "publication_date",
+    },
+    {
+      label: "Task",
+      type: "text",
+      sortable: "task",
+    },
+    {
+      label: "Reward",
+      type: "text",
+      sortable: "reward",
+    },
+  ],
+};

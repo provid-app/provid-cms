@@ -34,6 +34,11 @@ export const generateBreadcrumb = (pathname: string) => {
         dest: "/category",
         label: "Kategori",
       });
+    } else if (pathname.includes("/mission")) {
+      breadcrumb.push({
+        dest: "/mission",
+        label: "Misi",
+      });
     }
   }
 

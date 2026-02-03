@@ -12,6 +12,9 @@
   --color-primary: var(--color-primary);
   --color-brand-second: var(--color-brand-second);
   --color-brand-main: var(--color-brand-main);
+  --color-blue-primary: var(--color-blue-primary);
+  --color-blue-main: var(--color-blue-main);
+  --color-blue-second: var(--color-blue-second);
   --color-foreground: var(--color-foreground);
   --color-muted-foreground: var(--color-muted-foreground);
   --color-relative: var(--color-relative);
@@ -58,6 +61,9 @@
   --color-primary: #51a933;
   --color-brand-second: #b9ddad;
   --color-brand-main: #dceed6;
+  --color-blue-primary: #1069c5;
+  --color-blue-main: #e7f0f9;
+  --color-blue-second: #9fc3e8;
   --color-foreground: #09090b;
   --color-muted-foreground: #71717a;
   --color-relative: #26303c;
