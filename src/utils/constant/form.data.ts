@@ -1,4 +1,5 @@
 import type { LoginInput } from "@utils/validator/auth.validator";
+import type { AddCategoryInput } from "@utils/validator/category.validator";
 import type { FormType } from "types/form.type";
 
 export const loginForm: FormType<LoginInput> = {
@@ -19,5 +20,20 @@ export const loginForm: FormType<LoginInput> = {
   defaultValues: {
     email: "",
     password: "",
+  },
+};
+
+export const categoryForm: FormType<AddCategoryInput> = {
+  inputs: [
+    {
+      type: "dropdown",
+      name: "category",
+      label: "Kategori",
+      placeholder: "Pilih kategori",
+      required: false,
+    },
+  ],
+  defaultValues: {
+    category: undefined,
   },
 };

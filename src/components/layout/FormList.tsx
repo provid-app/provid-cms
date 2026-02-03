@@ -1,4 +1,4 @@
-import { CustomTextInput, Flex } from "@components/custom";
+import { CustomDropdown, CustomTextInput, Flex } from "@components/custom";
 import { Controller, type Control } from "react-hook-form";
 import type { InputType } from "types/form.type";
 
@@ -15,9 +15,12 @@ const FormList = ({ control, listData }: Props) => {
           key={index.toString()}
           control={control}
           name={item.name}
-          render={({ field }) => (
-            <CustomTextInput inputData={item} field={field} />
-          )}
+          render={({ field }) => {
+            if (item.type === "dropdown")
+              return <CustomDropdown inputData={item} field={field} />;
+
+            return <CustomTextInput inputData={item} field={field} />;
+          }}
         />
       ))}
     </Flex>

@@ -3,16 +3,22 @@ import { IconPlus } from "@tabler/icons-react";
 
 type Props = {
   buttonLabel: string;
+  onClick?: () => void;
 };
 
-const PageHeader = ({ buttonLabel }: Props) => {
+const PageHeader = ({ buttonLabel, onClick }: Props) => {
   return (
     <Flex className="flex-row! items-center justify-between">
       <Flex className="flex-row! items-center">
         <SearchInput />
       </Flex>
 
-      <CustomButton label={buttonLabel} icon={IconPlus} size="md" />
+      <CustomButton
+        label={buttonLabel}
+        icon={IconPlus}
+        size="md"
+        onClick={onClick}
+      />
     </Flex>
   );
 };

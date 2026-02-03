@@ -15,6 +15,7 @@
   --color-foreground: var(--color-foreground);
   --color-muted-foreground: var(--color-muted-foreground);
   --color-relative: var(--color-relative);
+  --color-dark-40: var(--color-dark-40);
   --color-dark-80: var(--color-dark-80);
   --default-font-family: "Plus Jakarta Sans";
   --text-headline: 48px;
@@ -60,6 +61,7 @@
   --color-foreground: #09090b;
   --color-muted-foreground: #71717a;
   --color-relative: #26303c;
+  --color-dark-40: rgba(7, 18, 32, 0.4);
   --color-dark-80: rgba(7, 18, 32, 0.8);
 }
 

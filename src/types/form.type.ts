@@ -4,11 +4,12 @@ export type DropdownType = {
 };
 
 export type InputType = {
-  type: "text" | "password";
+  type: "text" | "password" | "dropdown";
   name: string;
   label?: string;
   placeholder?: string;
   required: boolean;
+  dropdown?: DropdownType[];
 };
 
 export type FormType<T> = {

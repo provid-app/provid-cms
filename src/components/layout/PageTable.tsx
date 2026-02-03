@@ -60,6 +60,7 @@ const PageTable = ({ headerData, bodyData }: Props) => {
                         key={index2.toString()}
                         type="button"
                         className="text-inactive cursor-pointer"
+                        onClick={action.onClick}
                       >
                         <Icon size={20} stroke={1.5} />
                       </button>

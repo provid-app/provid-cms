@@ -1,4 +1,5 @@
-import type { DropdownType } from "./form.type";
+import type { AddCategoryInput } from "@utils/validator/category.validator";
+import type { DropdownType, FormType } from "./form.type";
 
 export type AuthStateType = {
   token: string | null;
@@ -17,5 +18,13 @@ export type ToastStateType = {
   type: "success" | "failed";
   message: string;
   onShow: (type: "success" | "failed", message: string) => void;
+  onHide: () => void;
+};
+
+export type CategoryModalStateType = {
+  show: boolean;
+  type: "add" | "edit";
+  form: FormType<AddCategoryInput> | null;
+  onShow: (form: FormType<AddCategoryInput>, type: "add" | "edit") => void;
   onHide: () => void;
 };

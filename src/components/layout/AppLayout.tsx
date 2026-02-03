@@ -14,6 +14,7 @@ import { generateBreadcrumb } from "@utils/helper/generator";
 import { useChartFilter } from "@stores/page.store";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import AddCategoryModal from "./AddCategoryModal";
 
 const AppLayout = () => {
   const [currentSub, setCurrentSub] = useState(0);
@@ -216,6 +217,8 @@ const AppLayout = () => {
 
         <Outlet />
       </Flex>
+
+      <AddCategoryModal />
     </Flex>
   );
 };
