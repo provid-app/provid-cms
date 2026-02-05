@@ -13,3 +13,5 @@ export { default as Toast } from "./Toast";
 export { default as SearchInput } from "./SearchInput";
 export { default as CustomSwitch } from "./CustomSwitch";
 export { default as CustomDropdown } from "./CustomDropdown";
+export { default as CustomTextArea } from "./CustomTextArea";
+export { default as CustomRadioBoxInput } from "./CustomRadioBoxInput";

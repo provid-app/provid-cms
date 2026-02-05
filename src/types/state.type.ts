@@ -1,5 +1,5 @@
 import type { AddCategoryInput } from "@utils/validator/category.validator";
-import type { DropdownType, FormType } from "./form.type";
+import type { DropdownType, FormType, MissionFormType } from "./form.type";
 
 export type AuthStateType = {
   token: string | null;
@@ -26,5 +26,13 @@ export type CategoryModalStateType = {
   type: "add" | "edit";
   form: FormType<AddCategoryInput> | null;
   onShow: (form: FormType<AddCategoryInput>, type: "add" | "edit") => void;
+  onHide: () => void;
+};
+
+export type MissionModalStateType = {
+  show: boolean;
+  type: "add" | "edit";
+  form: MissionFormType | null;
+  onShow: (form: MissionFormType, type: "add" | "edit") => void;
   onHide: () => void;
 };

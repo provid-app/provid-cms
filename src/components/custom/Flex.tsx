@@ -1,14 +1,15 @@
-import { forwardRef, type ReactNode } from "react";
+import { forwardRef, type CSSProperties, type ReactNode } from "react";
 
 type Props = {
   children?: ReactNode;
   className?: string;
+  style?: CSSProperties;
 };
 
 const Flex = forwardRef<HTMLDivElement, Props>(
-  ({ children, className }, ref) => {
+  ({ children, className, style }, ref) => {
     return (
-      <div ref={ref} className={`flex flex-col ${className}`}>
+      <div ref={ref} className={`flex flex-col ${className}`} style={style}>
         {children}
       </div>
     );

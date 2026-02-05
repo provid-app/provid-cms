@@ -1,3 +1,4 @@
+import { Coin } from "@assets/index";
 import { CustomSwitch, Flex } from "@components/custom";
 import {
   IconCalendarWeek,
@@ -51,6 +52,12 @@ const PageTable = ({ headerData, bodyData }: Props) => {
                     />
                   ) : item2.type === "text" ? (
                     <p className="text-body2 text-title">{item2.label}</p>
+                  ) : item2.type === "coin" ? (
+                    <Flex className="flex-row! items-center gap-2">
+                      <Coin width={16} height={16} />
+
+                      <p className="text-body2 text-title">{item2.label}</p>
+                    </Flex>
                   ) : (
                     <Flex className="items-start">
                       <Flex

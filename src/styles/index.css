@@ -71,6 +71,18 @@
   --color-dark-80: rgba(7, 18, 32, 0.8);
 }
 
+/* ::-webkit-scrollbar {
+  @apply w-1.5 rounded-full;
+}
+
+::-webkit-scrollbar-track {
+  @apply w-1.5 rounded-full bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply w-1.5 rounded-full bg-neutral-300;
+} */
+
 h1 {
   @apply text-headline;
 }
@@ -85,4 +97,16 @@ h3 {
 
 input {
   @apply text-body2 text-title outline-none;
+}
+
+input::placeholder {
+  @apply text-text;
+}
+
+textarea {
+  @apply text-body2 text-title outline-none h-45;
+}
+
+textarea::placeholder {
+  @apply text-text;
 }

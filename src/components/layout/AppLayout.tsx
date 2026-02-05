@@ -15,6 +15,7 @@ import { useChartFilter } from "@stores/page.store";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import AddCategoryModal from "./AddCategoryModal";
+import AddMissionModal from "./AddMissionModal";
 
 const AppLayout = () => {
   const [currentSub, setCurrentSub] = useState(0);
@@ -153,7 +154,7 @@ const AppLayout = () => {
 
         <Flex className="p-4 border-t border-t-border flex-row! items-center gap-4">
           <Flex className="size-10 rounded-full items-center justify-center bg-border">
-            <p className="text-body2 font-semibold text-title">A</p>
+            <p className="text-body2 font-semibold text-title">T</p>
           </Flex>
 
           <Flex className="flex-1">
@@ -219,6 +220,7 @@ const AppLayout = () => {
       </Flex>
 
       <AddCategoryModal />
+      <AddMissionModal />
     </Flex>
   );
 };
