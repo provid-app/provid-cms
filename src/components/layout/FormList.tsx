@@ -32,17 +32,37 @@ const FormList = ({ control, listData }: Props) => {
             key={index.toString()}
             control={control}
             name={item.name}
-            render={({ field }) => {
+            render={({ field, fieldState: { error } }) => {
               if (item.type === "dropdown")
-                return <CustomDropdown inputData={item} field={field} />;
+                return (
+                  <CustomDropdown
+                    inputData={item}
+                    field={field}
+                    error={error}
+                  />
+                );
 
               if (item.type === "textarea")
-                return <CustomTextArea inputData={item} field={field} />;
+                return (
+                  <CustomTextArea
+                    inputData={item}
+                    field={field}
+                    error={error}
+                  />
+                );
 
               if (item.type === "radiobox")
-                return <CustomRadioBoxInput inputData={item} field={field} />;
+                return (
+                  <CustomRadioBoxInput
+                    inputData={item}
+                    field={field}
+                    error={error}
+                  />
+                );
 
-              return <CustomTextInput inputData={item} field={field} />;
+              return (
+                <CustomTextInput inputData={item} field={field} error={error} />
+              );
             }}
           />
         );

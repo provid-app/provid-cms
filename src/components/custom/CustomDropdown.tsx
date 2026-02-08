@@ -1,7 +1,11 @@
-import type { ControllerRenderProps } from "react-hook-form";
+import type { ControllerRenderProps, FieldError } from "react-hook-form";
 import type { InputType } from "types/form.type";
 import Flex from "./Flex";
-import { IconCheck, IconChevronDown } from "@tabler/icons-react";
+import {
+  IconAlertTriangle,
+  IconCheck,
+  IconChevronDown,
+} from "@tabler/icons-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { ButtonFlex } from "@components/layout";
@@ -9,9 +13,10 @@ import { ButtonFlex } from "@components/layout";
 type Props = {
   inputData: InputType;
   field: ControllerRenderProps<any, string>;
+  error?: FieldError;
 };
 
-const CustomDropdown = ({ inputData, field }: Props) => {
+const CustomDropdown = ({ inputData, field, error }: Props) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const wrapperRef = useRef<HTMLButtonElement>(null);
@@ -41,7 +46,7 @@ const CustomDropdown = ({ inputData, field }: Props) => {
       <button
         ref={wrapperRef}
         type="button"
-        className="flex items-center justify-between p-3 border border-border rounded-lg cursor-pointer"
+        className={`flex items-center justify-between p-3 border ${error ? "border-danger-primary bg-danger-main" : "border-border bg-white"} rounded-lg cursor-pointer`}
         onClick={() => setShowDropdown((prev) => !prev)}
       >
         <p className={`text-body2 ${field.value ? "text-title" : "text-text"}`}>
@@ -50,6 +55,14 @@ const CustomDropdown = ({ inputData, field }: Props) => {
 
         <IconChevronDown size={20} color="#071220" stroke={1.5} />
       </button>
+
+      {error && (
+        <Flex className="flex-row! items-center gap-1 text-danger-primary">
+          <IconAlertTriangle size={20} stroke={1.5} />
+
+          <p className="text-caption">{error.message}</p>
+        </Flex>
+      )}
 
       <AnimatePresence>
         {showDropdown && (

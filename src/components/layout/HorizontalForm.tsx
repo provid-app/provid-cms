@@ -16,11 +16,23 @@ const HorizontalForm = ({ control, formData }: Props) => {
             key={index.toString()}
             control={control}
             name={input.name}
-            render={({ field }) => {
+            render={({ field, fieldState: { error } }) => {
               if (input.type === "dropdown")
-                return <CustomDropdown inputData={input} field={field} />;
+                return (
+                  <CustomDropdown
+                    inputData={input}
+                    field={field}
+                    error={error}
+                  />
+                );
 
-              return <CustomTextInput inputData={input} field={field} />;
+              return (
+                <CustomTextInput
+                  inputData={input}
+                  field={field}
+                  error={error}
+                />
+              );
             }}
           />
         </Flex>

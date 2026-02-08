@@ -1,3 +1,11 @@
+import {
+  eachDayOfInterval,
+  endOfMonth,
+  endOfWeek,
+  startOfMonth,
+  startOfWeek,
+} from "date-fns";
+
 export const generateBreadcrumb = (pathname: string) => {
   const breadcrumb = [];
 
@@ -55,4 +63,11 @@ export const generateBreadcrumb = (pathname: string) => {
   }
 
   return breadcrumb;
+};
+
+export const generateCalendarDays = (month: Date) => {
+  return eachDayOfInterval({
+    start: startOfWeek(startOfMonth(month), { weekStartsOn: 0 }),
+    end: endOfWeek(endOfMonth(month), { weekStartsOn: 0 }),
+  });
 };

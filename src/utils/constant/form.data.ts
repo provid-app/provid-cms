@@ -125,10 +125,12 @@ export const missionForm: MissionFormType = {
   defaultValues: {
     mission_name: "",
     mission_desc: "",
-    reward: 0,
+    reward: "",
     segment_id: undefined,
     instruction: "",
     mission_type: undefined,
-    mission_quantity: 0,
+    mission_quantity: "",
+    with_schedule: false,
+    schedule_at: undefined,
   },
 };

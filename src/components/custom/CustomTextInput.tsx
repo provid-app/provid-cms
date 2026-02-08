@@ -1,15 +1,17 @@
-import type { ControllerRenderProps } from "react-hook-form";
+import type { ControllerRenderProps, FieldError } from "react-hook-form";
 import type { InputType } from "types/form.type";
 import Flex from "./Flex";
 import { useState, type ChangeEvent } from "react";
-import { IconEye, IconEyeOff } from "@tabler/icons-react";
+import { IconAlertTriangle, IconEye, IconEyeOff } from "@tabler/icons-react";
+import { convertNumberFormat } from "@utils/helper/converter";
 
 type Props = {
   inputData: InputType;
   field: ControllerRenderProps<any, string>;
+  error?: FieldError;
 };
 
-const CustomTextInput = ({ inputData, field }: Props) => {
+const CustomTextInput = ({ inputData, field, error }: Props) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const onHandleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,9 +33,16 @@ const CustomTextInput = ({ inputData, field }: Props) => {
         </p>
       )}
 
-      <Flex className="p-3 border border-neutral-200 rounded-lg flex-row! items-center bg-white">
+      <Flex
+        className={`p-3 border ${error ? "border-danger-primary bg-danger-main" : "border-border bg-white"} rounded-lg flex-row! items-center`}
+      >
         <input
           {...field}
+          value={
+            inputData.type === "number"
+              ? convertNumberFormat(Number(field.value))
+              : field.value
+          }
           type={
             inputData.type === "password"
               ? showPassword
@@ -56,6 +65,14 @@ const CustomTextInput = ({ inputData, field }: Props) => {
           </button>
         )}
       </Flex>
+
+      {error && (
+        <Flex className="flex-row! items-center gap-1 text-danger-primary">
+          <IconAlertTriangle size={20} stroke={1.5} />
+
+          <p className="text-caption">{error.message}</p>
+        </Flex>
+      )}
     </Flex>
   );
 };

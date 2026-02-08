@@ -24,6 +24,8 @@ export const MONTH = [
 
 export const DAY = ["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"];
 
+export const DAY_CALENDAR = ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"];
+
 export const MISSION_COUNT = ["1 Misi", "2-5 Misi", "6-10 Misi", "> 10 Misi"];
 
 export const AGE = ["< 17", "17-25", "26-35", "36-45", "46-55", "> 55"];

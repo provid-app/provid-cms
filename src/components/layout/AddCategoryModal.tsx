@@ -15,7 +15,7 @@ const AddCategoryModal = () => {
   const categoryModal = useCategoryModal();
   const showToast = useToast((state) => state.onShow);
 
-  const { control, reset } = useForm({
+  const { control, reset, handleSubmit } = useForm({
     resolver: zodResolver(addCategoryValidator),
     defaultValues: categoryModal.form?.defaultValues,
   });
@@ -69,13 +69,13 @@ const AddCategoryModal = () => {
               <CustomButton
                 label="Simpan"
                 size="md"
-                onClick={() => {
+                onClick={handleSubmit(() => {
                   categoryModal.onHide();
                   showToast(
                     "success",
                     `Kategori berhasil ${categoryModal.type === "edit" ? "diubah" : "ditambahkan"}!`,
                   );
-                }}
+                })}
               />
             </Flex>
           </motion.div>

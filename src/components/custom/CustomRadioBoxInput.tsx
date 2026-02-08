@@ -1,15 +1,16 @@
-import type { ControllerRenderProps } from "react-hook-form";
+import type { ControllerRenderProps, FieldError } from "react-hook-form";
 import type { InputType } from "types/form.type";
 import Flex from "./Flex";
 import { motion } from "motion/react";
-import { IconCheck } from "@tabler/icons-react";
+import { IconAlertTriangle, IconCheck } from "@tabler/icons-react";
 
 type Props = {
   inputData: InputType;
   field: ControllerRenderProps<any, string>;
+  error?: FieldError;
 };
 
-const CustomRadioBoxInput = ({ inputData, field }: Props) => {
+const CustomRadioBoxInput = ({ inputData, field, error }: Props) => {
   return (
     <Flex className="gap-2">
       {inputData.label && (
@@ -66,6 +67,14 @@ const CustomRadioBoxInput = ({ inputData, field }: Props) => {
           </motion.div>
         ))}
       </div>
+
+      {error && (
+        <Flex className="flex-row! items-center gap-1 text-danger-primary">
+          <IconAlertTriangle size={20} stroke={1.5} />
+
+          <p className="text-caption">{error.message}</p>
+        </Flex>
+      )}
     </Flex>
   );
 };

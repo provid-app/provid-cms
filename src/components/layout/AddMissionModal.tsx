@@ -1,15 +1,26 @@
-import { CustomButton, Flex } from "@components/custom";
+import {
+  CustomButton,
+  CustomScheduleInput,
+  CustomSwitch,
+  Flex,
+} from "@components/custom";
 import ModalContainer from "@containers/ModalContainer";
 import { useMissionModal } from "@stores/modal.store";
 import { IconCircleCheck, IconX } from "@tabler/icons-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import FormList from "./FormList";
-import { useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { missionForm } from "@utils/constant/form.data";
 import { Coin } from "@assets/index";
 import { convertNumberFormat } from "@utils/helper/converter";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  addMissionValidator,
+  type AddMissionInput,
+} from "@utils/validator/mission.validator";
+import { useToast } from "@stores/page.store";
 
 const AddMissionModal = () => {
   const [currPage, setCurrPage] = useState(0);
@@ -17,10 +28,61 @@ const AddMissionModal = () => {
   const boxRef = useRef<HTMLDivElement>(null);
 
   const missionModal = useMissionModal();
+  const showToast = useToast((state) => state.onShow);
 
-  const { control, reset, getValues } = useForm({
-    defaultValues: missionModal.form?.defaultValues,
+  const { control, reset, getValues, trigger } = useForm({
+    mode: "onChange",
+    resolver: zodResolver(addMissionValidator),
+    defaultValues: missionModal.form?.defaultValues as AddMissionInput,
   });
+
+  const withSchedule = useWatch({
+    control,
+    name: "with_schedule",
+  });
+
+  const onHandleSubmit = async () => {
+    let valid: boolean = false;
+
+    const step1Form =
+      missionModal.form?.inputs[0].flatMap((item) => {
+        if (item.type === "horizontal") {
+          return item.inputs?.map((item2) => item2.name);
+        }
+
+        return item.name;
+      }) ?? [];
+    const step2Form =
+      missionModal.form?.inputs[1].flatMap((item) => {
+        if (item.type === "horizontal") {
+          return item.inputs?.map((item2) => item2.name);
+        }
+
+        return item.name;
+      }) ?? [];
+
+    if (currPage === 0) {
+      valid = await trigger(step1Form as any);
+    } else if (currPage === 1) {
+      valid = await trigger(step2Form as any);
+    } else if (currPage === 2) {
+      valid = await trigger(["schedule_at"]);
+    }
+
+    if (valid) {
+      if (currPage < 2) {
+        setCurrPage((prev) => prev + 1);
+      } else {
+        missionModal.onHide();
+        showToast(
+          "success",
+          `Misi berhasil ${missionModal.type === "edit" ? "diubah" : "ditambahkan"}!`,
+        );
+      }
+    } else {
+      return;
+    }
+  };
 
   useEffect(() => {
     if (boxRef.current) {
@@ -234,13 +296,38 @@ const AddMissionModal = () => {
 
                           <div className="h-px bg-border" />
 
-                          <p className="text-body2 text-text">
+                          <p className="text-body2 text-text whitespace-pre-line">
                             {getValues().instruction}
                           </p>
                         </Flex>
                       </Flex>
 
-                      <Flex className="flex-1"></Flex>
+                      <Flex className="flex-1 gap-1">
+                        <Controller
+                          control={control}
+                          name="with_schedule"
+                          render={({ field }) => (
+                            <CustomSwitch
+                              label="Jadwalkan Publikasi"
+                              value={field.value!}
+                              onChange={(value) => field.onChange(value)}
+                            />
+                          )}
+                        />
+
+                        {withSchedule && (
+                          <Controller
+                            control={control}
+                            name="schedule_at"
+                            render={({ field, fieldState: { error } }) => (
+                              <CustomScheduleInput
+                                field={field}
+                                error={error}
+                              />
+                            )}
+                          />
+                        )}
+                      </Flex>
                     </Flex>
                   </Flex>
                 </ScrollArea.Viewport>
@@ -269,11 +356,7 @@ const AddMissionModal = () => {
                 <CustomButton
                   label={currPage === 2 ? "Terbitkan" : "Lanjutkan"}
                   size="md"
-                  onClick={() => {
-                    if (currPage < 2) {
-                      setCurrPage((prev) => prev + 1);
-                    }
-                  }}
+                  onClick={async () => await onHandleSubmit()}
                 />
               </Flex>
             </Flex>
