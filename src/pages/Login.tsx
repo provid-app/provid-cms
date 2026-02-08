@@ -2,7 +2,10 @@ import { AuthVector, Logo } from "@assets/index";
 import { CustomButton, Flex } from "@components/custom";
 import { FormList } from "@components/layout";
 import { loginForm } from "@utils/constant/form.data";
-import { loginValidator } from "@utils/validator/auth.validator";
+import {
+  loginValidator,
+  type LoginInput,
+} from "@utils/validator/auth.validator";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth, useToast } from "@stores/page.store";
@@ -13,7 +16,7 @@ const Login = () => {
 
   const { control, handleSubmit } = useForm({
     resolver: zodResolver(loginValidator),
-    defaultValues: loginForm.defaultValues,
+    defaultValues: loginForm.defaultValues as LoginInput,
   });
 
   return (
