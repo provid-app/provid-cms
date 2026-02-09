@@ -6,8 +6,8 @@ import ButtonFlex from "./ButtonFlex";
 import {
   IconCalendarWeek,
   IconChevronDown,
-  IconDotsCircleHorizontal,
   IconLayoutSidebarLeftCollapse,
+  IconLogout,
 } from "@tabler/icons-react";
 import * as Separator from "@radix-ui/react-separator";
 import { generateBreadcrumb } from "@utils/helper/generator";
@@ -166,8 +166,8 @@ const AppLayout = () => {
             <p className="text-body2 text-text">Admin</p>
           </Flex>
 
-          <ButtonFlex className="size-6 rounded-md text-text hover:text-primary hover:bg-brand-main transition-colors duration-300">
-            <IconDotsCircleHorizontal size={18.5} stroke={1.5} />
+          <ButtonFlex className="size-8 rounded-md text-text hover:text-danger-primary hover:bg-danger-main transition-colors duration-300">
+            <IconLogout size={16} stroke={1.5} />
           </ButtonFlex>
         </Flex>
       </Flex>
