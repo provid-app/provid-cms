@@ -17,3 +17,4 @@ export { default as CustomTextArea } from "./CustomTextArea";
 export { default as CustomRadioBoxInput } from "./CustomRadioBoxInput";
 export { default as CustomScheduleInput } from "./CustomScheduleInput";
 export { default as Calendar } from "./Calendar";
+export { default as PaginationFooter } from "./PaginationFooter";

@@ -16,6 +16,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import AddCategoryModal from "./AddCategoryModal";
 import AddMissionModal from "./AddMissionModal";
+import MissionDetailModal from "./MissionDetailModal";
 
 const AppLayout = () => {
   const [currentSub, setCurrentSub] = useState(0);
@@ -221,6 +222,7 @@ const AppLayout = () => {
 
       <AddCategoryModal />
       <AddMissionModal />
+      <MissionDetailModal />
     </Flex>
   );
 };

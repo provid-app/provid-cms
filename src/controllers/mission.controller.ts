@@ -3,8 +3,11 @@ import type { TableBodyType } from "types/page.type";
 import { format } from "date-fns";
 import { convertNumberFormat } from "@utils/helper/converter";
 import { IconChevronRight } from "@tabler/icons-react";
+import { useMissionDetailModal } from "@stores/modal.store";
 
 const useMissionController = () => {
+  const showMissionDetailModal = useMissionDetailModal((state) => state.onShow);
+
   const useGetMissions = () => {
     const mission = generateMission(10);
 
@@ -42,7 +45,7 @@ const useMissionController = () => {
         {
           icon: IconChevronRight,
           type: "nav",
-          onClick: () => console.log("Nav"),
+          onClick: () => showMissionDetailModal(item),
         },
       ],
     }));

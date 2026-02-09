@@ -5,3 +5,4 @@ export { default as KPICardGrid } from "./KPICardGrid";
 export { default as PageHeader } from "./PageHeader";
 export { default as AddCategoryModal } from "./AddCategoryModal";
 export { default as HorizontalForm } from "./HorizontalForm";
+export { default as MissionDetailModal } from "./MissionDetailModal";

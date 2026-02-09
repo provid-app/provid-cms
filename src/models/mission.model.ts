@@ -5,4 +5,8 @@ export interface MissionDTO {
   publication_date: string;
   task: string;
   reward: number;
+  instruction: string;
+  mission_desc: string;
+  segment: string;
+  created_at: string;
 }

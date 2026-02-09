@@ -13,4 +13,8 @@ export const generateMission = (length: number): MissionDTO[] =>
     publication_date: faker.date.anytime().toISOString(),
     task: `${faker.number.int({ min: 1, max: 100 })} ${faker.helpers.arrayElement(["Ads", "App"])}`,
     reward: faker.number.int({ min: 1000, max: 50000 }),
+    created_at: faker.date.anytime().toISOString(),
+    instruction: faker.lorem.paragraphs(),
+    mission_desc: faker.commerce.productDescription(),
+    segment: faker.company.buzzAdjective(),
   }));

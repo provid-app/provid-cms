@@ -1,4 +1,4 @@
-import { Flex } from "@components/custom";
+import { Flex, PaginationFooter } from "@components/custom";
 import { PageHeader } from "@components/layout";
 import PageTable from "@components/layout/PageTable";
 import useMissionController from "@controllers/mission.controller";
@@ -55,7 +55,11 @@ const ManageMission = () => {
         }
       />
 
-      <PageTable headerData={missionHeaderData} bodyData={missions} />
+      <Flex className="gap-1.5">
+        <PageTable headerData={missionHeaderData} bodyData={missions} />
+
+        <PaginationFooter />
+      </Flex>
     </Flex>
   );
 };
