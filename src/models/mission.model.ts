@@ -7,6 +7,9 @@ export interface MissionDTO {
   reward: number;
   instruction: string;
   mission_desc: string;
-  segment: string;
+  segment: {
+    id: number;
+    segmet: string;
+  };
   created_at: string;
 }

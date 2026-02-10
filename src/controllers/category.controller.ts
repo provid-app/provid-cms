@@ -1,5 +1,4 @@
 import { useCategoryModal } from "@stores/modal.store";
-import { IconEdit } from "@tabler/icons-react";
 import { categoryForm } from "@utils/constant/form.data";
 import { generateCategory } from "@utils/data/category.dummy";
 import type { DropdownType } from "types/form.type";
@@ -30,8 +29,8 @@ const useCategoryController = () => {
       ],
       action: [
         {
-          type: "edit",
-          icon: IconEdit,
+          type: "custom",
+          label: "Edit",
           onClick: () =>
             showCategoryModal(
               {

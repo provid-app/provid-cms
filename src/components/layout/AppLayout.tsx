@@ -17,6 +17,7 @@ import { useState } from "react";
 import AddCategoryModal from "./AddCategoryModal";
 import AddMissionModal from "./AddMissionModal";
 import MissionDetailModal from "./MissionDetailModal";
+import EditMissionModal from "./EditMissionModal";
 
 const AppLayout = () => {
   const [currentSub, setCurrentSub] = useState(0);
@@ -222,6 +223,7 @@ const AppLayout = () => {
 
       <AddCategoryModal />
       <AddMissionModal />
+      <EditMissionModal />
       <MissionDetailModal />
     </Flex>
   );

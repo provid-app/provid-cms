@@ -1,5 +1,6 @@
 import type {
   CategoryModalStateType,
+  EditMissionModalStateType,
   MissionDetailModalStateType,
   MissionModalStateType,
 } from "types/state.type";
@@ -15,10 +16,16 @@ export const useCategoryModal = create<CategoryModalStateType>((set) => ({
 
 export const useMissionModal = create<MissionModalStateType>((set) => ({
   show: false,
-  type: "add",
   form: null,
-  onShow: (form, type) => set({ show: true, form, type }),
-  onHide: () => set({ show: false, form: null, type: "add" }),
+  onShow: (form) => set({ show: true, form }),
+  onHide: () => set({ show: false, form: null }),
+}));
+
+export const useEditMissionModal = create<EditMissionModalStateType>((set) => ({
+  show: false,
+  form: null,
+  onShow: (form) => set({ show: true, form }),
+  onHide: () => set({ show: false, form: null }),
 }));
 
 export const useMissionDetailModal = create<MissionDetailModalStateType>(

@@ -21,37 +21,34 @@ const ManageMission = () => {
       <PageHeader
         buttonLabel="Tambah Misi"
         onClick={() =>
-          showMissionModal(
-            {
-              ...missionForm,
-              inputs: missionForm.inputs.map((item, index) => {
-                if (index === 0) {
-                  return item.map((input) => {
-                    if (input.name === "second") {
-                      return {
-                        ...input,
-                        inputs: input.inputs?.map((input2) => {
-                          if (input2.name === "segment_id") {
-                            return {
-                              ...input2,
-                              dropdown: segmentDropdown,
-                            };
-                          }
+          showMissionModal({
+            ...missionForm,
+            inputs: missionForm.inputs.map((item, index) => {
+              if (index === 0) {
+                return item.map((input) => {
+                  if (input.name === "second") {
+                    return {
+                      ...input,
+                      inputs: input.inputs?.map((input2) => {
+                        if (input2.name === "segment_id") {
+                          return {
+                            ...input2,
+                            dropdown: segmentDropdown,
+                          };
+                        }
 
-                          return input2;
-                        }),
-                      };
-                    }
+                        return input2;
+                      }),
+                    };
+                  }
 
-                    return input;
-                  });
-                }
+                  return input;
+                });
+              }
 
-                return item;
-              }),
-            },
-            "add",
-          )
+              return item;
+            }),
+          })
         }
       />
 

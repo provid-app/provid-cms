@@ -9,7 +9,7 @@ type Props = {
 const ModalContainer = ({ children, layout = "center" }: Props) => {
   return (
     <Flex
-      className={`absolute w-dvw h-dvh ${layout === "right" ? "items-end" : "items-center justify-center"} bg-dark-40`}
+      className={`absolute w-dvw h-dvh z-50 ${layout === "right" ? "items-end" : "items-center justify-center"} bg-dark-40`}
     >
       {children}
     </Flex>

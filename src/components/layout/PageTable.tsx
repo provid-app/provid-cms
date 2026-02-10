@@ -1,5 +1,5 @@
 import { Coin } from "@assets/index";
-import { CustomSwitch, Flex } from "@components/custom";
+import { CustomActionButton, CustomSwitch, Flex } from "@components/custom";
 import {
   IconCalendarWeek,
   IconCircleDashed,
@@ -82,20 +82,9 @@ const PageTable = ({ headerData, bodyData }: Props) => {
 
               {item.action && (
                 <td className="text-center border-b border-b-border">
-                  {item.action.map((action, index2) => {
-                    const Icon = action.icon;
-
-                    return (
-                      <button
-                        key={index2.toString()}
-                        type="button"
-                        className="text-inactive cursor-pointer"
-                        onClick={action.onClick}
-                      >
-                        <Icon size={20} stroke={1.5} />
-                      </button>
-                    );
-                  })}
+                  <Flex className="items-center">
+                    <CustomActionButton actionData={item.action} />
+                  </Flex>
                 </td>
               )}
             </tr>

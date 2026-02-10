@@ -1,5 +1,6 @@
 import type { LoginInput } from "@utils/validator/auth.validator";
 import type { AddCategoryInput } from "@utils/validator/category.validator";
+import type { EditMissionInput } from "@utils/validator/mission.validator";
 import type { FormType, MissionFormType } from "types/form.type";
 
 export const loginForm: FormType<LoginInput> = {
@@ -132,5 +133,67 @@ export const missionForm: MissionFormType = {
     mission_quantity: "",
     with_schedule: false,
     schedule_at: undefined,
+  },
+};
+
+export const editMissionForm: FormType<EditMissionInput> = {
+  inputs: [
+    {
+      type: "horizontal",
+      name: "first",
+      required: false,
+      inputs: [
+        {
+          type: "text",
+          name: "mission_name",
+          label: "Nama Misi",
+          placeholder: "Masukan nama misi...",
+          required: true,
+        },
+        {
+          type: "text",
+          name: "mission_desc",
+          label: "Deskripsi",
+          placeholder: "Masukan deskripsi...",
+          required: true,
+        },
+      ],
+    },
+    {
+      type: "horizontal",
+      name: "second",
+      required: false,
+      inputs: [
+        {
+          type: "number",
+          name: "reward",
+          label: "Reward Coins",
+          placeholder: "0",
+          required: true,
+        },
+        {
+          type: "dropdown",
+          name: "segment_id",
+          label: "Segmen",
+          placeholder: "Pilih segmen",
+          required: true,
+          dropdown: [],
+        },
+      ],
+    },
+    {
+      type: "textarea",
+      name: "instruction",
+      label: "Instruksi",
+      placeholder: "Masukan instruksi...",
+      required: true,
+    },
+  ],
+  defaultValues: {
+    mission_name: "",
+    mission_desc: "",
+    reward: "",
+    instruction: "",
+    segment_id: undefined,
   },
 };

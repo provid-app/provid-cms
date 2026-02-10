@@ -23,7 +23,7 @@ const MissionDetailModal = () => {
       {missionDetailModal.show && (
         <ModalContainer layout="right">
           <motion.div
-            className="flex flex-col bg-white h-full p-6 gap-4"
+            className="flex flex-col bg-white h-full p-6 gap-4 overflow-hidden"
             initial={{ width: 0 }}
             animate={{ width: 643 }}
             exit={{ width: 0 }}
@@ -101,7 +101,7 @@ const MissionDetailModal = () => {
 
                 <Flex className="px-2.5 py-0.5 rounded-md bg-second">
                   <p className="text-caption font-semibold text-text">
-                    {missionDetailModal.data?.segment ?? ""}
+                    {missionDetailModal.data?.segment.segmet ?? ""}
                   </p>
                 </Flex>
               </Flex>

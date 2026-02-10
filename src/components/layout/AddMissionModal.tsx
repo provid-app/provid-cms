@@ -74,10 +74,7 @@ const AddMissionModal = () => {
         setCurrPage((prev) => prev + 1);
       } else {
         missionModal.onHide();
-        showToast(
-          "success",
-          `Misi berhasil ${missionModal.type === "edit" ? "diubah" : "ditambahkan"}!`,
-        );
+        showToast("success", "Misi berhasil ditambahkan!");
       }
     } else {
       return;

@@ -60,10 +60,8 @@ export type TableHeaderType = {
 };
 
 export type RowActionType = {
-  type: "edit" | "delete" | "nav";
-  icon: ForwardRefExoticComponent<
-    IconProps & React.RefAttributes<SVGSVGElement>
-  >;
+  type: "custom" | "delete";
+  label: string;
   onClick: () => void;
 };
 

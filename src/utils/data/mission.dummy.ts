@@ -16,5 +16,8 @@ export const generateMission = (length: number): MissionDTO[] =>
     created_at: faker.date.anytime().toISOString(),
     instruction: faker.lorem.paragraphs(),
     mission_desc: faker.commerce.productDescription(),
-    segment: faker.company.buzzAdjective(),
+    segment: {
+      id: faker.number.int({ max: 100 }),
+      segmet: faker.company.buzzAdjective(),
+    },
   }));
