@@ -2,8 +2,14 @@ import type { ControllerRenderProps, FieldError } from "react-hook-form";
 import type { InputType } from "types/form.type";
 import Flex from "./Flex";
 import { useState, type ChangeEvent } from "react";
-import { IconAlertTriangle, IconEye, IconEyeOff } from "@tabler/icons-react";
+import {
+  IconAlertTriangle,
+  IconEye,
+  IconEyeOff,
+  IconLock,
+} from "@tabler/icons-react";
 import { convertNumberFormat } from "@utils/helper/converter";
+import { Tooltip } from "react-tooltip";
 
 type Props = {
   inputData: InputType;
@@ -51,18 +57,40 @@ const CustomTextInput = ({ inputData, field, error }: Props) => {
               : "text"
           }
           placeholder={inputData.placeholder}
-          className="flex-1"
+          className={`flex-1 ${inputData.lock ? "opacity-50" : ""}`}
+          disabled={inputData.lock}
           onChange={onHandleChange}
         />
 
-        {inputData.type === "password" && (
-          <button
-            type="button"
-            className="text-title cursor-pointer"
-            onClick={() => setShowPassword((prev) => !prev)}
-          >
-            {!showPassword ? <IconEyeOff size={20} /> : <IconEye size={20} />}
-          </button>
+        {inputData.lock ? (
+          <>
+            <Flex tooltipId={`input-lock-${inputData.name}`}>
+              <IconLock
+                size={20}
+                color="#071220"
+                stroke={1.5}
+                className="opacity-50"
+              />
+            </Flex>
+
+            <Tooltip
+              id={`input-lock-${inputData.name}`}
+              place="bottom"
+              className="bg-relative! rounded-lg! z-40"
+            >
+              <p className="text-body2">{inputData.label} tidak dapat diubah</p>
+            </Tooltip>
+          </>
+        ) : (
+          inputData.type === "password" && (
+            <button
+              type="button"
+              className="text-title cursor-pointer"
+              onClick={() => setShowPassword((prev) => !prev)}
+            >
+              {!showPassword ? <IconEyeOff size={20} /> : <IconEye size={20} />}
+            </button>
+          )
         )}
       </Flex>
 

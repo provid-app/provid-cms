@@ -4,12 +4,18 @@ type Props = {
   children?: ReactNode;
   className?: string;
   style?: CSSProperties;
+  tooltipId?: string;
 };
 
 const Flex = forwardRef<HTMLDivElement, Props>(
-  ({ children, className, style }, ref) => {
+  ({ children, className, style, tooltipId }, ref) => {
     return (
-      <div ref={ref} className={`flex flex-col ${className}`} style={style}>
+      <div
+        ref={ref}
+        data-tooltip-id={tooltipId}
+        className={`flex flex-col ${className}`}
+        style={style}
+      >
         {children}
       </div>
     );

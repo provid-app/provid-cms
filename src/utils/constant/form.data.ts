@@ -170,6 +170,7 @@ export const editMissionForm: FormType<EditMissionInput> = {
           label: "Reward Coins",
           placeholder: "0",
           required: true,
+          lock: true,
         },
         {
           type: "dropdown",

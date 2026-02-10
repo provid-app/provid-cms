@@ -25,6 +25,7 @@ export type InputType = {
   dropdown?: DropdownType[];
   inputs?: InputType[];
   radiobox?: RadioBoxType[];
+  lock?: boolean;
 };
 
 export type FormType<T> = {
