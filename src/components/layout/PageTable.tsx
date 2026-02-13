@@ -2,22 +2,43 @@ import { Coin } from "@assets/index";
 import { CustomActionButton, CustomSwitch, Flex } from "@components/custom";
 import {
   IconCalendarWeek,
+  IconCheck,
   IconCircleDashed,
   IconSend,
 } from "@tabler/icons-react";
 import type { TableBodyType, TableHeaderType } from "types/page.type";
+import * as CheckBox from "@radix-ui/react-checkbox";
 
 type Props = {
   headerData: TableHeaderType;
   bodyData: TableBodyType[];
+  onSelectAll?: () => void;
 };
 
-const PageTable = ({ headerData, bodyData }: Props) => {
+const PageTable = ({ headerData, bodyData, onSelectAll }: Props) => {
   return (
     <Flex className="border border-border rounded-md">
       <table className="table-fixed">
         <thead>
           <tr>
+            {headerData.withCheckbox && (
+              <th className="w-12 border-b border-b-border">
+                <Flex className="items-center justify-center">
+                  <CheckBox.Root
+                    checked={bodyData.every((item) => item.isSelected)}
+                    onCheckedChange={() => {
+                      if (onSelectAll) onSelectAll();
+                    }}
+                    className="size-4 rounded-sm border border-border cursor-pointer transition data-[state=checked]:bg-primary data-[state=checked]:border-brand-main"
+                  >
+                    <CheckBox.Indicator>
+                      <IconCheck size={14} color="#ffffff" />
+                    </CheckBox.Indicator>
+                  </CheckBox.Root>
+                </Flex>
+              </th>
+            )}
+
             {headerData.header.map((item, index) => (
               <th
                 key={index.toString()}
@@ -38,6 +59,24 @@ const PageTable = ({ headerData, bodyData }: Props) => {
         <tbody>
           {bodyData.map((item, index) => (
             <tr key={index.toString()}>
+              {item.onSelect && (
+                <td className="w-12 border-b border-b-border">
+                  <Flex className="items-center justify-center">
+                    <CheckBox.Root
+                      checked={item.isSelected}
+                      onCheckedChange={() => {
+                        if (item.onSelect) item.onSelect();
+                      }}
+                      className="size-4 rounded-sm border border-border cursor-pointer transition data-[state=checked]:bg-primary data-[state=checked]:border-brand-main"
+                    >
+                      <CheckBox.Indicator>
+                        <IconCheck size={14} color="#ffffff" />
+                      </CheckBox.Indicator>
+                    </CheckBox.Root>
+                  </Flex>
+                </td>
+              )}
+
               {item.row.map((item2, index2) => (
                 <td
                   key={index2.toString()}

@@ -1,5 +1,5 @@
 import { generateMission } from "@utils/data/mission.dummy";
-import type { TableBodyType } from "types/page.type";
+import type { RowActionType, TableBodyType } from "types/page.type";
 import { format } from "date-fns";
 import { convertNumberFormat } from "@utils/helper/converter";
 import {
@@ -8,6 +8,8 @@ import {
 } from "@stores/modal.store";
 import { editMissionForm } from "@utils/constant/form.data";
 import useSegmentController from "./segment.controller";
+import type { MissionDTO } from "@models/mission.model";
+import { useState } from "react";
 
 const useMissionController = () => {
   const showMissionDetailModal = useMissionDetailModal((state) => state.onShow);
@@ -16,46 +18,44 @@ const useMissionController = () => {
   const { useGetSegmentDropdown } = useSegmentController();
 
   const useGetMissions = () => {
+    const [selected, setSelected] = useState<number[]>([]);
+
     const mission = generateMission(10);
 
     const { finalData: segmentDropdown } = useGetSegmentDropdown();
 
-    let finalData: TableBodyType[] = [];
+    const getActions = (item: MissionDTO): RowActionType[] => {
+      const act: (RowActionType | null)[] =
+        item.mission_status === "Terjadwal"
+          ? [
+              {
+                type: "custom",
+                label: "Edit Jadwal",
+                onClick: () => console.log("Edit Jadwal"),
+              },
+            ]
+          : item.mission_status === "Draf"
+            ? [
+                {
+                  type: "custom",
+                  label: "Jadwalkan",
+                  onClick: () => console.log("Jadwalkan"),
+                },
+                {
+                  type: "custom",
+                  label: "Terbitkan",
+                  onClick: () => console.log("Terbitkan"),
+                },
+              ]
+            : [null];
 
-    finalData = mission.map((item) => ({
-      row: [
-        {
-          label: item.mission_name,
-          type: "text",
-        },
-        {
-          label: item.mission_status,
-          type:
-            item.mission_status === "Terjadwal"
-              ? "arrange"
-              : item.mission_status === "Diterbitkan"
-                ? "publish"
-                : "draft",
-        },
-        {
-          label: format(new Date(item.publication_date), "LLL dd, yyyy"),
-          type: "text",
-        },
-        {
-          label: item.task,
-          type: "text",
-        },
-        {
-          label: convertNumberFormat(item.reward),
-          type: "coin",
-        },
-      ],
-      action: [
+      const curr: (RowActionType | null)[] = [
         {
           type: "custom",
           label: "Detail",
           onClick: () => showMissionDetailModal(item),
         },
+        ...act,
         {
           type: "custom",
           label: "Edit Misi",
@@ -93,16 +93,64 @@ const useMissionController = () => {
               },
             }),
         },
+      ];
+
+      return curr.filter((item) => item !== null) as RowActionType[];
+    };
+
+    const onSelectAll = () => {
+      if (selected.length === mission.length) {
+        setSelected([]);
+      } else {
+        setSelected(mission.map((item) => item.id));
+      }
+    };
+
+    let finalData: TableBodyType[] = [];
+
+    finalData = mission.map((item) => ({
+      row: [
         {
-          type: "delete",
-          label: "Hapus",
-          onClick: () => console.log("Hapus"),
+          label: item.mission_name,
+          type: "text",
+        },
+        {
+          label: item.mission_status,
+          type:
+            item.mission_status === "Terjadwal"
+              ? "arrange"
+              : item.mission_status === "Diterbitkan"
+                ? "publish"
+                : "draft",
+        },
+        {
+          label: format(new Date(item.publication_date), "LLL dd, yyyy"),
+          type: "text",
+        },
+        {
+          label: item.task,
+          type: "text",
+        },
+        {
+          label: convertNumberFormat(item.reward),
+          type: "coin",
         },
       ],
+      action: getActions(item),
+      isSelected: selected.includes(item.id),
+      onSelect: () =>
+        setSelected((prev) => {
+          const checkIsExist = prev.includes(item.id);
+
+          if (checkIsExist) return prev.filter((dat) => dat !== item.id);
+          return [...prev, item.id];
+        }),
     }));
 
     return {
       finalData,
+      selected,
+      onSelectAll,
     };
   };
 

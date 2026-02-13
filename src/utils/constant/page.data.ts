@@ -84,6 +84,7 @@ export const sidebarData: SidebarType[] = [
 
 export const categoryHeaderData: TableHeaderType = {
   withAction: true,
+  withCheckbox: false,
   header: [
     {
       label: "Kategori",
@@ -102,6 +103,7 @@ export const categoryHeaderData: TableHeaderType = {
 
 export const missionHeaderData: TableHeaderType = {
   withAction: true,
+  withCheckbox: true,
   header: [
     {
       label: "Nama Misi",

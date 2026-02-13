@@ -34,7 +34,7 @@ const LeaderboardChart = ({
   xAxisType = "default",
 }: Props) => {
   return (
-    <Flex className="border border-border rounded-xl">
+    <Flex className="border border-border rounded-xl h-full">
       <Flex className="px-3 py-2.5 border-b border-b-border">
         <p className="text-body2 text-text">{title}</p>
       </Flex>
@@ -46,8 +46,8 @@ const LeaderboardChart = ({
           <DropdownFilter filterData={filterData} />
         </Flex>
 
-        <Flex className="flex-1 h-55">
-          <ResponsiveContainer width="100%" height="100%">
+        <Flex className="flex-1">
+          <ResponsiveContainer width="100%" height={220}>
             <BarChart
               data={chartData}
               layout="vertical"

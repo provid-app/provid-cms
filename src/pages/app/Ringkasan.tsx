@@ -26,16 +26,13 @@ const Ringkasan = () => {
 
   return (
     <Flex className="grow basis-0 p-4 gap-4 overflow-y-auto">
-      <div
-        className="grid gap-4"
-        style={{ gridTemplateColumns: summaryKPI.map(() => "auto").join(" ") }}
-      >
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
         {summaryKPI.map((item, index) => (
           <KPICard key={index.toString()} cardData={item} />
         ))}
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <PieChartBox
           title="Perbandingan Jenis Misi"
           subTitle="Distribusi Jenis Misi"

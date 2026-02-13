@@ -56,6 +56,7 @@ export type RowType = {
 
 export type TableHeaderType = {
   withAction: boolean;
+  withCheckbox: boolean;
   header: RowType[];
 };
 
@@ -68,4 +69,6 @@ export type RowActionType = {
 export type TableBodyType = {
   row: RowType[];
   action?: RowActionType[];
+  isSelected?: boolean;
+  onSelect?: () => void;
 };

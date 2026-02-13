@@ -13,13 +13,15 @@ const ManageMission = () => {
   const { useGetMissions } = useMissionController();
   const { useGetSegmentDropdown } = useSegmentController();
 
-  const { finalData: missions } = useGetMissions();
+  const { finalData: missions, selected, onSelectAll } = useGetMissions();
   const { finalData: segmentDropdown } = useGetSegmentDropdown();
 
   return (
     <Flex className="grow basis-0 p-4 gap-4 overflow-y-auto">
       <PageHeader
         buttonLabel="Tambah Misi"
+        withDelete
+        deleteCount={selected.length > 0 ? selected.length : undefined}
         onClick={() =>
           showMissionModal({
             ...missionForm,
@@ -53,7 +55,11 @@ const ManageMission = () => {
       />
 
       <Flex className="gap-1.5">
-        <PageTable headerData={missionHeaderData} bodyData={missions} />
+        <PageTable
+          headerData={missionHeaderData}
+          bodyData={missions}
+          onSelectAll={onSelectAll}
+        />
 
         <PaginationFooter />
       </Flex>

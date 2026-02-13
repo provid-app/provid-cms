@@ -23,8 +23,8 @@ const SummaryLineChart = ({ chartData }: Props) => {
         <p className="text-body2 text-text">Ringkasan Keuangan</p>
       </Flex>
 
-      <Flex className="flex-row! border-b border-b-border gap-1.5">
-        <Flex className="flex-1 pt-7 px-6 pb-6 gap-1">
+      <Flex className="lg:flex-row! border-b border-b-border lg:gap-1.5">
+        <Flex className="px-4 pt-4 pb-3 border-b border-b-border lg:border-b-0 lg:flex-1 lg:pt-7 lg:px-6 lg:pb-6 gap-1">
           <p className="text-body1 font-semibold text-title truncate">
             Estimasi Kinerja Finansial
           </p>
@@ -34,7 +34,7 @@ const SummaryLineChart = ({ chartData }: Props) => {
           </p>
         </Flex>
 
-        <Flex className="flex-row! border-l border-l-border">
+        <Flex className="lg:flex-row! lg:border-l border-l-border">
           {chartData.kpi.map((item, index) => (
             <EstimationValueBox
               key={index.toString()}

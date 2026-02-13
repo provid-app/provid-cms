@@ -30,7 +30,7 @@ const EstimationValueBox = ({ valueData, isLast }: Props) => {
 
   return (
     <Flex
-      className={`px-4 py-4.75 gap-1 ${!isLast && "border-r border-r-border"}`}
+      className={`px-4 py-6 lg:py-4.75 gap-1 ${!isLast && "border-b border-b-border lg:border-b-0 lg:border-r lg:border-r-border"}`}
     >
       <p className="text-body2 text-text truncate">{valueData.label}</p>
 
