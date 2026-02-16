@@ -18,6 +18,9 @@ import AddCategoryModal from "./AddCategoryModal";
 import AddMissionModal from "./AddMissionModal";
 import MissionDetailModal from "./MissionDetailModal";
 import EditMissionModal from "./EditMissionModal";
+import EditScheduleModal from "./EditScheduleModal";
+import ConfirmationModal from "./ConfirmationModal";
+import AddScheduleModal from "./AddScheduleModal";
 
 const AppLayout = () => {
   const [currentSub, setCurrentSub] = useState(0);
@@ -120,7 +123,7 @@ const AppLayout = () => {
 
                     <Flex className="flex-1 gap-1">
                       {item.sub.map((sub, index) => (
-                        <Flex className="relative p-1">
+                        <Flex key={index.toString()} className="relative p-1">
                           <Link
                             key={index.toString()}
                             to={`${item.dest}${sub.dest}`}
@@ -224,7 +227,10 @@ const AppLayout = () => {
       <AddCategoryModal />
       <AddMissionModal />
       <EditMissionModal />
+      <EditScheduleModal />
+      <AddScheduleModal />
       <MissionDetailModal />
+      <ConfirmationModal />
     </Flex>
   );
 };

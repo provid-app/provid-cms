@@ -83,7 +83,7 @@ export const sidebarData: SidebarType[] = [
 ];
 
 export const categoryHeaderData: TableHeaderType = {
-  withAction: true,
+  withAction: false,
   withCheckbox: false,
   header: [
     {

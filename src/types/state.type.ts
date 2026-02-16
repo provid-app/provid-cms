@@ -51,3 +51,33 @@ export type MissionDetailModalStateType = {
   onShow: (data: MissionDTO) => void;
   onHide: () => void;
 };
+
+export type EditScheduleModalStateType = {
+  show: boolean;
+  lastSchedule: string;
+  onShow: (lastSchedule: string) => void;
+  onHide: () => void;
+};
+
+export type ConfirmationModalStateType = {
+  show: boolean;
+  type: "danger" | "default";
+  buttonLabel: string;
+  title: string;
+  description: string;
+  onSubmit?: () => void;
+  onShow: (
+    type: "danger" | "default",
+    title: string,
+    description: string,
+    buttonLabel: string,
+    onSubmit: () => void,
+  ) => void;
+  onHide: () => void;
+};
+
+export type AddScheduleModalStateType = {
+  show: boolean;
+  onShow: () => void;
+  onHide: () => void;
+};

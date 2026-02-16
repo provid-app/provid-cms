@@ -87,10 +87,15 @@ const MissionDetailModal = () => {
                 </Flex>
 
                 <p className="text-body2 text-title">
-                  {convertDateFormat(
-                    new Date(missionDetailModal.data?.publication_date ?? ""),
-                    "LLL d, yyyy",
-                  )}
+                  {missionDetailModal.data &&
+                  missionDetailModal.data.publication_date
+                    ? convertDateFormat(
+                        new Date(
+                          missionDetailModal.data?.publication_date ?? "",
+                        ),
+                        "LLL d, yyyy",
+                      )
+                    : "-"}
                 </p>
               </Flex>
 

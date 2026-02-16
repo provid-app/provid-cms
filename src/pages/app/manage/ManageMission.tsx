@@ -3,12 +3,15 @@ import { PageHeader } from "@components/layout";
 import PageTable from "@components/layout/PageTable";
 import useMissionController from "@controllers/mission.controller";
 import useSegmentController from "@controllers/segment.controller";
-import { useMissionModal } from "@stores/modal.store";
+import { useConfirmationModal, useMissionModal } from "@stores/modal.store";
+import { useToast } from "@stores/page.store";
 import { missionForm } from "@utils/constant/form.data";
 import { missionHeaderData } from "@utils/constant/page.data";
 
 const ManageMission = () => {
   const showMissionModal = useMissionModal((state) => state.onShow);
+  const confirmationModal = useConfirmationModal();
+  const showToast = useToast((state) => state.onShow);
 
   const { useGetMissions } = useMissionController();
   const { useGetSegmentDropdown } = useSegmentController();
@@ -51,6 +54,18 @@ const ManageMission = () => {
               return item;
             }),
           })
+        }
+        onDelete={() =>
+          confirmationModal.onShow(
+            "danger",
+            `Hapus ${selected.length === 1 ? selected[0].name : `${selected.length} misi`}`,
+            "Misi akan dihapus dan tidak dapat dikembalikan.",
+            "Hapus",
+            () => {
+              showToast("success", "Misi berhasil dihapus!");
+              confirmationModal.onHide();
+            },
+          )
         }
       />
 

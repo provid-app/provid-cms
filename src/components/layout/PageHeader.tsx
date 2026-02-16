@@ -2,10 +2,11 @@ import { CustomButton, Flex, SearchInput } from "@components/custom";
 import { IconPlus, IconTrash } from "@tabler/icons-react";
 
 type Props = {
-  buttonLabel: string;
+  buttonLabel?: string;
   withDelete?: boolean;
   deleteCount?: number;
   onClick?: () => void;
+  onDelete?: () => void;
 };
 
 const PageHeader = ({
@@ -13,6 +14,7 @@ const PageHeader = ({
   withDelete,
   deleteCount,
   onClick,
+  onDelete,
 }: Props) => {
   return (
     <Flex className="flex-row! items-center justify-between">
@@ -33,16 +35,19 @@ const PageHeader = ({
               size="md"
               mode="danger-outline"
               disabled={deleteCount === undefined}
+              onClick={onDelete}
             />
           </>
         )}
 
-        <CustomButton
-          label={buttonLabel}
-          icon={IconPlus}
-          size="md"
-          onClick={onClick}
-        />
+        {buttonLabel && (
+          <CustomButton
+            label={buttonLabel}
+            icon={IconPlus}
+            size="md"
+            onClick={onClick}
+          />
+        )}
       </Flex>
     </Flex>
   );

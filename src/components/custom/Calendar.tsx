@@ -15,11 +15,12 @@ import {
 
 type Props = {
   value?: Date;
+  lastValue?: Date;
   onSelect: (day: Date) => void;
 };
 
-const Calendar = ({ value, onSelect }: Props) => {
-  const [baseMonth, setBaseMonth] = useState(value || new Date());
+const Calendar = ({ value, lastValue, onSelect }: Props) => {
+  const [baseMonth, setBaseMonth] = useState(lastValue ?? value ?? new Date());
 
   const currDays = generateCalendarDays(baseMonth);
 
@@ -62,12 +63,13 @@ const Calendar = ({ value, onSelect }: Props) => {
             const isCurrentMonth = isSameMonth(item, baseMonth);
             const isBelowToday = isBefore(item, new Date());
             const isSelected = value && isSameDay(item, value);
+            const isLastValue = lastValue && isSameDay(item, lastValue);
 
             return (
               <Flex key={index.toString()} className="items-center">
                 {isCurrentMonth && (
                   <ButtonFlex
-                    className={`size-8 items-center justify-center ${isSelected ? "bg-primary" : "bg-white"} rounded-md ${isSelected ? "text-white" : isBelowToday ? "text-text" : "text-title hover:bg-primary hover:text-white transition-colors duration-300"}`}
+                    className={`size-8 items-center justify-center ${isLastValue ? "bg-brand-main" : isSelected ? "bg-primary" : "bg-transparent"} rounded-md ${isLastValue ? "text-primary" : isSelected ? "text-white" : isBelowToday ? "text-text" : "text-title hover:bg-primary hover:text-white transition-colors duration-300"}`}
                     disabled={isBelowToday}
                     onClick={() => onSelect(item)}
                   >

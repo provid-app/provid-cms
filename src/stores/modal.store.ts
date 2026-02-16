@@ -1,6 +1,9 @@
 import type {
+  AddScheduleModalStateType,
   CategoryModalStateType,
+  ConfirmationModalStateType,
   EditMissionModalStateType,
+  EditScheduleModalStateType,
   MissionDetailModalStateType,
   MissionModalStateType,
 } from "types/state.type";
@@ -36,3 +39,39 @@ export const useMissionDetailModal = create<MissionDetailModalStateType>(
     onHide: () => set({ show: false, data: null }),
   }),
 );
+
+export const useEditScheduleModal = create<EditScheduleModalStateType>(
+  (set) => ({
+    show: false,
+    lastSchedule: "",
+    onShow: (lastSchedule) => set({ show: true, lastSchedule }),
+    onHide: () => set({ show: false, lastSchedule: "" }),
+  }),
+);
+
+export const useConfirmationModal = create<ConfirmationModalStateType>(
+  (set) => ({
+    show: false,
+    type: "default",
+    title: "",
+    description: "",
+    buttonLabel: "",
+    onSubmit: undefined,
+    onShow: (type, title, description, buttonLabel, onSubmit) =>
+      set({ show: true, type, title, description, buttonLabel, onSubmit }),
+    onHide: () =>
+      set({
+        show: false,
+        type: "default",
+        title: "",
+        description: "",
+        buttonLabel: "",
+      }),
+  }),
+);
+
+export const useAddScheduleModal = create<AddScheduleModalStateType>((set) => ({
+  show: false,
+  onShow: () => set({ show: true }),
+  onHide: () => set({ show: false }),
+}));

@@ -1,11 +1,11 @@
-import { useCategoryModal } from "@stores/modal.store";
-import { categoryForm } from "@utils/constant/form.data";
+// import { useCategoryModal } from "@stores/modal.store";
+// import { categoryForm } from "@utils/constant/form.data";
 import { generateCategory } from "@utils/data/category.dummy";
 import type { DropdownType } from "types/form.type";
 import type { TableBodyType } from "types/page.type";
 
 const useCategoryController = () => {
-  const showCategoryModal = useCategoryModal((state) => state.onShow);
+  // const showCategoryModal = useCategoryModal((state) => state.onShow);
 
   const useGetCategoriesService = () => {
     const category = generateCategory();
@@ -27,38 +27,38 @@ const useCategoryController = () => {
           label: item.is_active ? "Aktif" : "Non-Aktif",
         },
       ],
-      action: [
-        {
-          type: "custom",
-          label: "Edit",
-          onClick: () =>
-            showCategoryModal(
-              {
-                ...categoryForm,
-                inputs: categoryForm.inputs.map((input) => {
-                  if (input.name === "category") {
-                    return {
-                      ...input,
-                      dropdown: category.map((item) => ({
-                        label: item.category_name,
-                        value: item.id.toString(),
-                      })),
-                    };
-                  }
+      // action: [
+      //   {
+      //     type: "custom",
+      //     label: "Edit",
+      //     onClick: () =>
+      //       showCategoryModal(
+      //         {
+      //           ...categoryForm,
+      //           inputs: categoryForm.inputs.map((input) => {
+      //             if (input.name === "category") {
+      //               return {
+      //                 ...input,
+      //                 dropdown: category.map((item) => ({
+      //                   label: item.category_name,
+      //                   value: item.id.toString(),
+      //                 })),
+      //               };
+      //             }
 
-                  return input;
-                }),
-                defaultValues: {
-                  category: {
-                    label: item.category_name,
-                    value: item.id.toString(),
-                  },
-                },
-              },
-              "edit",
-            ),
-        },
-      ],
+      //             return input;
+      //           }),
+      //           defaultValues: {
+      //             category: {
+      //               label: item.category_name,
+      //               value: item.id.toString(),
+      //             },
+      //           },
+      //         },
+      //         "edit",
+      //       ),
+      //   },
+      // ],
     }));
 
     return {

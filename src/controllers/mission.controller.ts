@@ -3,26 +3,53 @@ import type { RowActionType, TableBodyType } from "types/page.type";
 import { format } from "date-fns";
 import { convertNumberFormat } from "@utils/helper/converter";
 import {
+  useAddScheduleModal,
+  useConfirmationModal,
   useEditMissionModal,
+  useEditScheduleModal,
   useMissionDetailModal,
 } from "@stores/modal.store";
 import { editMissionForm } from "@utils/constant/form.data";
 import useSegmentController from "./segment.controller";
 import type { MissionDTO } from "@models/mission.model";
 import { useState } from "react";
+import { useToast } from "@stores/page.store";
 
 const useMissionController = () => {
   const showMissionDetailModal = useMissionDetailModal((state) => state.onShow);
   const showEditMissionModal = useEditMissionModal((state) => state.onShow);
+  const showEditScheduleModal = useEditScheduleModal((state) => state.onShow);
+  const showAddScheduleModal = useAddScheduleModal((state) => state.onShow);
+  const confirmationModal = useConfirmationModal();
+  const showToast = useToast((state) => state.onShow);
 
   const { useGetSegmentDropdown } = useSegmentController();
 
   const useGetMissions = () => {
-    const [selected, setSelected] = useState<number[]>([]);
+    const [selected, setSelected] = useState<{ id: number; name: string }[]>(
+      [],
+    );
 
     const mission = generateMission(10);
 
     const { finalData: segmentDropdown } = useGetSegmentDropdown();
+
+    const resetSelected = () => {
+      if (selected.length > 0) setSelected([]);
+    };
+
+    const onSelectAll = () => {
+      if (selected.length === mission.length) {
+        setSelected([]);
+      } else {
+        setSelected(
+          mission.map((item) => ({
+            id: item.id,
+            name: item.mission_name,
+          })),
+        );
+      }
+    };
 
     const getActions = (item: MissionDTO): RowActionType[] => {
       const act: (RowActionType | null)[] =
@@ -31,7 +58,10 @@ const useMissionController = () => {
               {
                 type: "custom",
                 label: "Edit Jadwal",
-                onClick: () => console.log("Edit Jadwal"),
+                onClick: () => {
+                  showEditScheduleModal(item.scheduled_at!);
+                  resetSelected();
+                },
               },
             ]
           : item.mission_status === "Draf"
@@ -39,12 +69,27 @@ const useMissionController = () => {
                 {
                   type: "custom",
                   label: "Jadwalkan",
-                  onClick: () => console.log("Jadwalkan"),
+                  onClick: () => {
+                    showAddScheduleModal();
+                    resetSelected();
+                  },
                 },
                 {
                   type: "custom",
                   label: "Terbitkan",
-                  onClick: () => console.log("Terbitkan"),
+                  onClick: () => {
+                    confirmationModal.onShow(
+                      "default",
+                      "Terbitkan",
+                      "Anda yakin ingin langsung menerbitkan misi ini? Misi akan langsung muncul di aplikasi user.",
+                      "Lanjutkan",
+                      () => {
+                        showToast("success", "Misi berhasil diterbitkan!");
+                        confirmationModal.onHide();
+                      },
+                    );
+                    resetSelected();
+                  },
                 },
               ]
             : [null];
@@ -53,13 +98,16 @@ const useMissionController = () => {
         {
           type: "custom",
           label: "Detail",
-          onClick: () => showMissionDetailModal(item),
+          onClick: () => {
+            showMissionDetailModal(item);
+            resetSelected();
+          },
         },
         ...act,
         {
           type: "custom",
           label: "Edit Misi",
-          onClick: () =>
+          onClick: () => {
             showEditMissionModal({
               ...editMissionForm,
               inputs: editMissionForm.inputs.map((item) => {
@@ -91,19 +139,13 @@ const useMissionController = () => {
                 },
                 instruction: item.instruction,
               },
-            }),
+            });
+            resetSelected();
+          },
         },
       ];
 
       return curr.filter((item) => item !== null) as RowActionType[];
-    };
-
-    const onSelectAll = () => {
-      if (selected.length === mission.length) {
-        setSelected([]);
-      } else {
-        setSelected(mission.map((item) => item.id));
-      }
     };
 
     let finalData: TableBodyType[] = [];
@@ -124,7 +166,9 @@ const useMissionController = () => {
                 : "draft",
         },
         {
-          label: format(new Date(item.publication_date), "LLL dd, yyyy"),
+          label: item.publication_date
+            ? format(new Date(item.publication_date), "LLL dd, yyyy")
+            : "-",
           type: "text",
         },
         {
@@ -137,13 +181,19 @@ const useMissionController = () => {
         },
       ],
       action: getActions(item),
-      isSelected: selected.includes(item.id),
+      isSelected: selected.some((tmp) => tmp.id === item.id),
       onSelect: () =>
         setSelected((prev) => {
-          const checkIsExist = prev.includes(item.id);
+          const checkIsExist = prev.some((tmp) => tmp.id === item.id);
 
-          if (checkIsExist) return prev.filter((dat) => dat !== item.id);
-          return [...prev, item.id];
+          if (checkIsExist) return prev.filter((dat) => dat.id !== item.id);
+          return [
+            ...prev,
+            {
+              id: item.id,
+              name: item.mission_name,
+            },
+          ];
         }),
     }));
 

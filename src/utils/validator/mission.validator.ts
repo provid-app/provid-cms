@@ -63,5 +63,9 @@ export const editMissionValidator = z.object({
   instruction: z.string().min(1, { message: "Instruksi harus diisi!" }),
 });
 
+export const addScheduleValidator = z.object({
+  scheduled_at: z.date({ required_error: "Jadwal harus diisi!" }),
+});
+
 export type AddMissionInput = z.infer<typeof addMissionValidator>;
 export type EditMissionInput = z.infer<typeof editMissionValidator>;
