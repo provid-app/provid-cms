@@ -72,3 +72,15 @@ export type TableBodyType = {
   isSelected?: boolean;
   onSelect?: () => void;
 };
+
+export type FilterDataType = {
+  label: string;
+  count: number;
+  isSelected: boolean;
+  onSelect: () => void;
+};
+
+export type FilterType = {
+  title: string;
+  data: FilterDataType[];
+};

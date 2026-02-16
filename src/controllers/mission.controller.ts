@@ -1,5 +1,5 @@
 import { generateMission } from "@utils/data/mission.dummy";
-import type { RowActionType, TableBodyType } from "types/page.type";
+import type { FilterType, RowActionType, TableBodyType } from "types/page.type";
 import { format } from "date-fns";
 import { convertNumberFormat } from "@utils/helper/converter";
 import {
@@ -29,6 +29,10 @@ const useMissionController = () => {
     const [selected, setSelected] = useState<{ id: number; name: string }[]>(
       [],
     );
+    const [filter, setFilter] = useState<{ status: string[]; type: string[] }>({
+      status: [],
+      type: [],
+    });
 
     const mission = generateMission(10);
 
@@ -48,6 +52,34 @@ const useMissionController = () => {
             name: item.mission_name,
           })),
         );
+      }
+    };
+
+    const onSelectFilter = (type: "status" | "type", value: string) => {
+      if (type === "status") {
+        if (filter.status.includes(value)) {
+          setFilter((prev) => ({
+            ...prev,
+            status: prev.status.filter((val) => val !== value),
+          }));
+        } else {
+          setFilter((prev) => ({
+            ...prev,
+            status: [...prev.status, value],
+          }));
+        }
+      } else if (type === "type") {
+        if (filter.type.includes(value)) {
+          setFilter((prev) => ({
+            ...prev,
+            type: prev.type.filter((val) => val !== value),
+          }));
+        } else {
+          setFilter((prev) => ({
+            ...prev,
+            type: [...prev.type, value],
+          }));
+        }
       }
     };
 
@@ -197,9 +229,53 @@ const useMissionController = () => {
         }),
     }));
 
+    const filterData: FilterType[] = [
+      {
+        title: "STATUS",
+        data: [
+          {
+            label: "Draf",
+            count: 1,
+            isSelected: filter.status.includes("draf"),
+            onSelect: () => onSelectFilter("status", "draf"),
+          },
+          {
+            label: "Terjadwal",
+            count: 2,
+            isSelected: filter.status.includes("scheduled"),
+            onSelect: () => onSelectFilter("status", "scheduled"),
+          },
+          {
+            label: "Diterbitkan",
+            count: 1,
+            isSelected: filter.status.includes("published"),
+            onSelect: () => onSelectFilter("status", "published"),
+          },
+        ],
+      },
+      {
+        title: "TIPE TASK",
+        data: [
+          {
+            label: "Ads",
+            count: 2,
+            isSelected: filter.type.includes("ads"),
+            onSelect: () => onSelectFilter("type", "ads"),
+          },
+          {
+            label: "App",
+            count: 2,
+            isSelected: filter.type.includes("app"),
+            onSelect: () => onSelectFilter("type", "app"),
+          },
+        ],
+      },
+    ];
+
     return {
       finalData,
       selected,
+      filterData,
       onSelectAll,
     };
   };

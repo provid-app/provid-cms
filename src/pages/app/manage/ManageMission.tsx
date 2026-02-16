@@ -16,7 +16,12 @@ const ManageMission = () => {
   const { useGetMissions } = useMissionController();
   const { useGetSegmentDropdown } = useSegmentController();
 
-  const { finalData: missions, selected, onSelectAll } = useGetMissions();
+  const {
+    finalData: missions,
+    selected,
+    filterData,
+    onSelectAll,
+  } = useGetMissions();
   const { finalData: segmentDropdown } = useGetSegmentDropdown();
 
   return (
@@ -25,6 +30,7 @@ const ManageMission = () => {
         buttonLabel="Tambah Misi"
         withDelete
         deleteCount={selected.length > 0 ? selected.length : undefined}
+        filterData={filterData}
         onClick={() =>
           showMissionModal({
             ...missionForm,
