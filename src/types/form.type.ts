@@ -30,7 +30,7 @@ export type InputType = {
 
 export type FormType<T> = {
   inputs: InputType[];
-  defaultValues: Partial<T>;
+  defaultValues: T;
 };
 
 export type MissionFormType = {

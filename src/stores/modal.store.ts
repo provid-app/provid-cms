@@ -6,6 +6,7 @@ import type {
   LoadingStateType,
   MissionDetailModalStateType,
   MissionModalStateType,
+  SegmentModalStateType,
 } from "types/state.type";
 import { create } from "zustand";
 
@@ -74,4 +75,12 @@ export const useAddScheduleModal = create<LoadingStateType>((set) => ({
   show: false,
   onShow: () => set({ show: true }),
   onHide: () => set({ show: false }),
+}));
+
+export const useSegmentModal = create<SegmentModalStateType>((set) => ({
+  show: false,
+  type: "add",
+  form: null,
+  onShow: (form, type) => set({ show: true, form, type }),
+  onHide: () => set({ show: false, type: "add", form: null }),
 }));

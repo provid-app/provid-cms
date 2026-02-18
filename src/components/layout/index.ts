@@ -10,3 +10,4 @@ export { default as EditMissionModal } from "./EditMissionModal";
 export { default as EditScheduleModal } from "./EditScheduleModal";
 export { default as ConfirmationModal } from "./ConfirmationModal";
 export { default as AddScheduleModal } from "./AddScheduleModal";
+export { default as AddSegmentModal } from "./AddSegmentModal";

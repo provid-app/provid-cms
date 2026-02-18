@@ -23,6 +23,7 @@ import ConfirmationModal from "./ConfirmationModal";
 import AddScheduleModal from "./AddScheduleModal";
 import { useConfirmationModal } from "@stores/modal.store";
 import useAuthController from "@controllers/auth.controller";
+import AddSegmentModal from "./AddSegmentModal";
 
 const AppLayout = () => {
   const [currentSub, setCurrentSub] = useState(0);
@@ -247,6 +248,7 @@ const AppLayout = () => {
       <AddScheduleModal />
       <MissionDetailModal />
       <ConfirmationModal />
+      <AddSegmentModal />
     </Flex>
   );
 };

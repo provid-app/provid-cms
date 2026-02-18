@@ -2,13 +2,15 @@ import { Flex } from "@components/custom";
 import { PageHeader } from "@components/layout";
 import PageTable from "@components/layout/PageTable";
 import useSegmentController from "@controllers/segment.controller";
-import { useConfirmationModal } from "@stores/modal.store";
+import { useConfirmationModal, useSegmentModal } from "@stores/modal.store";
 import { useToast } from "@stores/page.store";
+import { addSegmentForm } from "@utils/constant/form.data";
 import { segmentHeaderData } from "@utils/constant/page.data";
 
 const ManageSegment = () => {
   const confirmationModal = useConfirmationModal();
   const showToast = useToast((state) => state.onShow);
+  const showSegmentModal = useSegmentModal((state) => state.onShow);
 
   const { useGetSegmentsService } = useSegmentController();
 
@@ -20,6 +22,7 @@ const ManageSegment = () => {
         buttonLabel="Tambah Segmen"
         withDelete
         deleteCount={selected.length > 0 ? selected.length : undefined}
+        onClick={() => showSegmentModal(addSegmentForm, "add")}
         onDelete={() =>
           confirmationModal.onShow(
             "danger",

@@ -8,5 +8,7 @@ export const successResponse = <T = any>(
 export const errorResponse = (error: unknown): ResType => {
   const axiosError = error as AxiosError;
 
+  console.log(axiosError.response);
+
   return axiosError.response!.data as ResType;
 };

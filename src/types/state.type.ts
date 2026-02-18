@@ -2,6 +2,7 @@ import type { AddCategoryInput } from "@utils/validator/category.validator";
 import type { DropdownType, FormType, MissionFormType } from "./form.type";
 import type { MissionDTO } from "@models/mission.model";
 import type { EditMissionInput } from "@utils/validator/mission.validator";
+import type { AddSegmentInput } from "@utils/validator/segment.validator";
 
 export type AuthStateType = {
   token: string | null;
@@ -80,5 +81,13 @@ export type ConfirmationModalStateType = {
 export type LoadingStateType = {
   show: boolean;
   onShow: () => void;
+  onHide: () => void;
+};
+
+export type SegmentModalStateType = {
+  show: boolean;
+  type: "add" | "edit";
+  form: FormType<AddSegmentInput> | null;
+  onShow: (form: FormType<AddSegmentInput>, type: "add" | "edit") => void;
   onHide: () => void;
 };

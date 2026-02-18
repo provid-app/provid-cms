@@ -20,51 +20,51 @@ type Props = {
 const PageTable = ({ headerData, bodyData, isLoading, onSelectAll }: Props) => {
   return (
     <Flex className="flex-1 border border-border rounded-md">
-      <table className="table-fixed">
-        <thead>
-          <tr>
-            {headerData.withCheckbox && (
-              <th className="w-12 border-b border-b-border">
-                <Flex className="items-center justify-center">
-                  <CheckBox.Root
-                    checked={bodyData.every((item) => item.isSelected)}
-                    onCheckedChange={() => {
-                      if (onSelectAll) onSelectAll();
-                    }}
-                    className="size-4 rounded-sm border border-border cursor-pointer transition data-[state=checked]:bg-primary data-[state=checked]:border-brand-main"
-                  >
-                    <CheckBox.Indicator>
-                      <IconCheck size={14} color="#ffffff" />
-                    </CheckBox.Indicator>
-                  </CheckBox.Root>
-                </Flex>
-              </th>
-            )}
+      {isLoading ? (
+        <TableSkeleton />
+      ) : (
+        <table className="table-fixed">
+          <thead>
+            <tr>
+              {headerData.withCheckbox && (
+                <th className="w-12 border-b border-b-border">
+                  <Flex className="items-center justify-center">
+                    <CheckBox.Root
+                      checked={bodyData.every((item) => item.isSelected)}
+                      onCheckedChange={() => {
+                        if (onSelectAll) onSelectAll();
+                      }}
+                      className="size-4 rounded-sm border border-border cursor-pointer transition data-[state=checked]:bg-primary data-[state=checked]:border-brand-main"
+                    >
+                      <CheckBox.Indicator>
+                        <IconCheck size={14} color="#ffffff" />
+                      </CheckBox.Indicator>
+                    </CheckBox.Root>
+                  </Flex>
+                </th>
+              )}
 
-            {headerData.header.map((item, index) => (
-              <th
-                key={index.toString()}
-                className="px-4 py-[13.5px] border-b border-b-border"
-              >
-                <Flex className="flex-row! items-center text-text">
-                  <p className="text-caption font-semibold text-left truncate">
-                    {item.label}
-                  </p>
-                </Flex>
-              </th>
-            ))}
+              {headerData.header.map((item, index) => (
+                <th
+                  key={index.toString()}
+                  className="px-4 py-[13.5px] border-b border-b-border"
+                >
+                  <Flex className="flex-row! items-center text-text">
+                    <p className="text-caption font-semibold text-left truncate">
+                      {item.label}
+                    </p>
+                  </Flex>
+                </th>
+              ))}
 
-            {headerData.withAction && (
-              <th className="w-13 border-b border-b-border" />
-            )}
-          </tr>
-        </thead>
+              {headerData.withAction && (
+                <th className="w-13 border-b border-b-border" />
+              )}
+            </tr>
+          </thead>
 
-        <tbody>
-          {isLoading ? (
-            <TableSkeleton headerData={headerData} />
-          ) : (
-            bodyData.map((item, index) => (
+          <tbody>
+            {bodyData.map((item, index) => (
               <tr key={index.toString()}>
                 {item.onSelect && (
                   <td className="w-12 border-b border-b-border">
@@ -136,10 +136,10 @@ const PageTable = ({ headerData, bodyData, isLoading, onSelectAll }: Props) => {
                   </td>
                 )}
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            ))}
+          </tbody>
+        </table>
+      )}
     </Flex>
   );
 };

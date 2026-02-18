@@ -1,6 +1,7 @@
 import type { LoginInput } from "@utils/validator/auth.validator";
 import type { AddCategoryInput } from "@utils/validator/category.validator";
 import type { EditMissionInput } from "@utils/validator/mission.validator";
+import type { AddSegmentInput } from "@utils/validator/segment.validator";
 import type { FormType, MissionFormType } from "types/form.type";
 
 export const loginForm: FormType<LoginInput> = {
@@ -196,5 +197,49 @@ export const editMissionForm: FormType<EditMissionInput> = {
     reward: "",
     instruction: "",
     segment_id: undefined,
+  },
+};
+
+export const addSegmentForm: FormType<AddSegmentInput> = {
+  inputs: [
+    {
+      type: "text",
+      name: "segment_name",
+      label: "Nama Segmen",
+      placeholder: "Masukan nama segmen...",
+      required: true,
+    },
+    {
+      type: "text",
+      name: "description",
+      label: "Deskripsi",
+      placeholder: "Masukan deskripsi...",
+      required: true,
+    },
+    {
+      type: "radiobox",
+      name: "layout",
+      label: "Tipe Arah",
+      required: true,
+      radiobox: [
+        {
+          label: "Horizontal",
+          subTitle:
+            "Di beranda, menampilkan minimal 3 kartu dan maksimal 10 kartu.",
+          value: "horizontal",
+        },
+        {
+          label: "Vertical",
+          subTitle:
+            "Di beranda, menampilkan minimal 3 kartu dan maksimal 5 kartu.",
+          value: "vertical",
+        },
+      ],
+    },
+  ],
+  defaultValues: {
+    segment_name: "",
+    description: "",
+    layout: undefined,
   },
 };

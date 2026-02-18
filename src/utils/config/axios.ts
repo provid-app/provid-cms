@@ -1,3 +1,4 @@
+import { useAuth } from "@stores/page.store";
 import axios from "axios";
 
 export const axiosInstance = axios.create({
@@ -21,3 +22,17 @@ axiosInstance.interceptors.request.use((config) => {
 
   return config;
 });
+
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (error.response.status === 401) {
+      console.log("Hello World");
+      localStorage.removeItem("@refresh");
+      localStorage.removeItem("@access");
+      useAuth.getState().resetToken();
+    }
+
+    return Promise.reject(error);
+  },
+);
