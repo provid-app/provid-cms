@@ -21,13 +21,18 @@ import EditMissionModal from "./EditMissionModal";
 import EditScheduleModal from "./EditScheduleModal";
 import ConfirmationModal from "./ConfirmationModal";
 import AddScheduleModal from "./AddScheduleModal";
+import { useConfirmationModal } from "@stores/modal.store";
+import useAuthController from "@controllers/auth.controller";
 
 const AppLayout = () => {
   const [currentSub, setCurrentSub] = useState(0);
 
   const chartFilter = useChartFilter();
+  const showConfirmationModal = useConfirmationModal((state) => state.onShow);
 
   const { pathname } = useLocation();
+
+  const { logoutService } = useAuthController();
 
   const crumbs = generateBreadcrumb(pathname);
 
@@ -170,7 +175,18 @@ const AppLayout = () => {
             <p className="text-body2 text-text">Admin</p>
           </Flex>
 
-          <ButtonFlex className="size-8 rounded-md text-text hover:text-danger-primary hover:bg-danger-main transition-colors duration-300">
+          <ButtonFlex
+            className="size-8 rounded-md text-text hover:text-danger-primary hover:bg-danger-main transition-colors duration-300"
+            onClick={() =>
+              showConfirmationModal(
+                "danger",
+                "Keluar",
+                "Anda yakin ingin keluar dari aplikasi?",
+                "Keluar",
+                logoutService,
+              )
+            }
+          >
             <IconLogout size={16} stroke={1.5} />
           </ButtonFlex>
         </Flex>

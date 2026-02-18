@@ -7,6 +7,7 @@ export type AuthStateType = {
   token: string | null;
   addToken: (token: string) => void;
   resetToken: () => void;
+  checkIsLoggedIn: () => void;
 };
 
 export type ChartFilterStateType = {
@@ -76,7 +77,7 @@ export type ConfirmationModalStateType = {
   onHide: () => void;
 };
 
-export type AddScheduleModalStateType = {
+export type LoadingStateType = {
   show: boolean;
   onShow: () => void;
   onHide: () => void;

@@ -1,5 +1,7 @@
 import type { IconProps } from "@tabler/icons-react";
 import type { ForwardRefExoticComponent } from "react";
+import { Squircle } from "ldrs/react";
+import "ldrs/react/Squircle.css";
 
 type Props = {
   type?: "button" | "submit";
@@ -16,6 +18,7 @@ type Props = {
     IconProps & React.RefAttributes<SVGSVGElement>
   >;
   disabled?: boolean;
+  isLoading?: boolean;
   onClick?: () => void;
 };
 
@@ -26,6 +29,7 @@ const CustomButton = ({
   label,
   icon,
   disabled,
+  isLoading,
   onClick,
 }: Props) => {
   const Icon = icon;
@@ -37,9 +41,22 @@ const CustomButton = ({
       disabled={disabled}
       onClick={onClick}
     >
-      {Icon && <Icon size={size === "md" ? 16 : 20} />}
+      {isLoading ? (
+        <Squircle
+          size="19"
+          stroke="3"
+          strokeLength="0.15"
+          bgOpacity="0.1"
+          speed="0.9"
+          color="white"
+        />
+      ) : (
+        <>
+          {Icon && <Icon size={size === "md" ? 16 : 20} />}
 
-      {label && <p className="text-body2 font-semibold">{label}</p>}
+          {label && <p className="text-body2 font-semibold">{label}</p>}
+        </>
+      )}
     </button>
   );
 };

@@ -5,6 +5,9 @@ import {
   startOfMonth,
   startOfWeek,
 } from "date-fns";
+import CryptoJS from "crypto-js";
+
+const SECRET_KEY = import.meta.env.VITE_SECRET_KEY;
 
 export const generateBreadcrumb = (pathname: string) => {
   const breadcrumb = [];
@@ -39,13 +42,18 @@ export const generateBreadcrumb = (pathname: string) => {
 
     if (pathname.includes("/category")) {
       breadcrumb.push({
-        dest: "/category",
+        dest: "/manage/category",
         label: "Kategori",
       });
     } else if (pathname.includes("/mission")) {
       breadcrumb.push({
-        dest: "/mission",
+        dest: "/manage/mission",
         label: "Misi",
+      });
+    } else if (pathname.includes("/segment")) {
+      breadcrumb.push({
+        dest: "/manage/segment",
+        label: "Segmen",
       });
     }
   }
@@ -70,4 +78,10 @@ export const generateCalendarDays = (month: Date) => {
     start: startOfWeek(startOfMonth(month), { weekStartsOn: 0 }),
     end: endOfWeek(endOfMonth(month), { weekStartsOn: 0 }),
   });
+};
+
+export const generateEncryption = (value: string): string => {
+  const encrypted = CryptoJS.AES.encrypt(value, SECRET_KEY);
+
+  return encrypted.toString();
 };

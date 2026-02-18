@@ -132,3 +132,25 @@ export const missionHeaderData: TableHeaderType = {
     },
   ],
 };
+
+export const segmentHeaderData: TableHeaderType = {
+  withAction: true,
+  withCheckbox: true,
+  header: [
+    {
+      label: "Nama Segment",
+      type: "text",
+      sortable: "segment_name",
+    },
+    {
+      label: "Deskripsi",
+      type: "text",
+      sortable: "description",
+    },
+    {
+      label: "Tipe Arah",
+      type: "text",
+      sortable: "layout",
+    },
+  ],
+};

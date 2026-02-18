@@ -1,6 +1,7 @@
 import type {
   AuthStateType,
   ChartFilterStateType,
+  LoadingStateType,
   ToastStateType,
 } from "types/state.type";
 import { create } from "zustand";
@@ -9,6 +10,11 @@ export const useAuth = create<AuthStateType>((set) => ({
   token: null,
   addToken: (token) => set({ token }),
   resetToken: () => set({ token: null }),
+  checkIsLoggedIn: () => {
+    const token = localStorage.getItem("@access");
+
+    if (token) set({ token });
+  },
 }));
 
 export const useChartFilter = create<ChartFilterStateType>((set) => ({
@@ -101,4 +107,10 @@ export const useToast = create<ToastStateType>((set) => ({
   message: "",
   onShow: (type, message) => set({ show: true, type, message }),
   onHide: () => set({ show: false, type: "failed", message: "" }),
+}));
+
+export const useLoadingButton = create<LoadingStateType>((set) => ({
+  show: false,
+  onShow: () => set({ show: true }),
+  onHide: () => set({ show: false }),
 }));

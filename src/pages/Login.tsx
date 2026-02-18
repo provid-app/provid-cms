@@ -8,11 +8,13 @@ import {
 } from "@utils/validator/auth.validator";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAuth, useToast } from "@stores/page.store";
+import useAuthController from "@controllers/auth.controller";
+import { useLoadingButton } from "@stores/page.store";
 
 const Login = () => {
-  const addToken = useAuth((state) => state.addToken);
-  const showToast = useToast((state) => state.onShow);
+  const isLoadingButton = useLoadingButton((state) => state.show);
+
+  const { loginService } = useAuthController();
 
   const { control, handleSubmit } = useForm({
     resolver: zodResolver(loginValidator),
@@ -30,17 +32,7 @@ const Login = () => {
 
         <form
           className="flex flex-col w-full max-w-87.5 gap-6"
-          onSubmit={handleSubmit((data) => {
-            if (
-              data.email === "halo@provid.id" &&
-              data.password === "GangAbbah#34A"
-            ) {
-              showToast("success", "Login berhasil!");
-              addToken("token");
-            } else {
-              showToast("failed", "Email atau Password salah!");
-            }
-          })}
+          onSubmit={handleSubmit(loginService)}
         >
           <Flex className="items-center py-2 gap-1">
             <p className="text-subtitle font-semibold text-foreground">
@@ -54,7 +46,12 @@ const Login = () => {
 
           <FormList control={control} listData={loginForm.inputs} />
 
-          <CustomButton type="submit" label="Masuk" />
+          <CustomButton
+            type="submit"
+            label="Masuk"
+            disabled={isLoadingButton}
+            isLoading={isLoadingButton}
+          />
         </form>
       </Flex>
     </Flex>

@@ -1,9 +1,9 @@
 import type {
-  AddScheduleModalStateType,
   CategoryModalStateType,
   ConfirmationModalStateType,
   EditMissionModalStateType,
   EditScheduleModalStateType,
+  LoadingStateType,
   MissionDetailModalStateType,
   MissionModalStateType,
 } from "types/state.type";
@@ -70,7 +70,7 @@ export const useConfirmationModal = create<ConfirmationModalStateType>(
   }),
 );
 
-export const useAddScheduleModal = create<AddScheduleModalStateType>((set) => ({
+export const useAddScheduleModal = create<LoadingStateType>((set) => ({
   show: false,
   onShow: () => set({ show: true }),
   onHide: () => set({ show: false }),

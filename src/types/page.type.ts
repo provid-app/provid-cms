@@ -84,3 +84,8 @@ export type FilterType = {
   title: string;
   data: FilterDataType[];
 };
+
+export type SelectedType = {
+  id: number;
+  name: string;
+};

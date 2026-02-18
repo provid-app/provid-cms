@@ -12,6 +12,11 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: development
+
+    env:
+      VITE_API_URL: ${{ vars.VITE_API_URL }}
+      VITE_SECRET_KEY: ${{ secrets.VITE_SECRET_KEY }}
 
     steps:
       - name: Checkout Code
@@ -32,9 +37,12 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
+          build-args: |
+            VITE_API_URL=${{ vars.VITE_API_URL }}
+            VITE_SECRET_KEY=${{ secrets.VITE_SECRET_KEY }}
           tags: |
-            ghcr.io/${{ env.IMAGE_NAME }}:latest
-            ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ env.IMAGE_NAME }}:latest
+            ${{ env.IMAGE_NAME }}:${{ github.sha }}
 
       - name: Deploy to VPS
         uses: appleboy/ssh-action@v1.0.0

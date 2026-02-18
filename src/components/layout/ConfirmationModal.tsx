@@ -1,11 +1,13 @@
 import { CustomButton, Flex } from "@components/custom";
 import ModalContainer from "@containers/ModalContainer";
 import { useConfirmationModal } from "@stores/modal.store";
+import { useLoadingButton } from "@stores/page.store";
 import { IconX } from "@tabler/icons-react";
 import { AnimatePresence, motion } from "motion/react";
 
 const ConfirmationModal = () => {
   const confirmationModal = useConfirmationModal();
+  const isLoadingButton = useLoadingButton((state) => state.show);
 
   return (
     <AnimatePresence>
@@ -41,6 +43,7 @@ const ConfirmationModal = () => {
                   label="Batalkan"
                   mode="ghost"
                   size="md"
+                  disabled={isLoadingButton}
                   onClick={confirmationModal.onHide}
                 />
               )}
@@ -51,6 +54,8 @@ const ConfirmationModal = () => {
                   confirmationModal.type === "danger" ? "danger" : "primary"
                 }
                 size="md"
+                disabled={isLoadingButton}
+                isLoading={isLoadingButton}
                 onClick={() => {
                   if (confirmationModal.onSubmit) confirmationModal.onSubmit();
                 }}
