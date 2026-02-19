@@ -1,8 +1,10 @@
 import type {
   CategoryModalStateType,
   ConfirmationModalStateType,
+  EditCoinValueModalStateType,
   EditMissionModalStateType,
   EditScheduleModalStateType,
+  EditWithdrawModalStateType,
   LoadingStateType,
   MissionDetailModalStateType,
   MissionModalStateType,
@@ -84,3 +86,21 @@ export const useSegmentModal = create<SegmentModalStateType>((set) => ({
   onShow: (form, type) => set({ show: true, form, type }),
   onHide: () => set({ show: false, type: "add", form: null }),
 }));
+
+export const useEditRewardModal = create<EditCoinValueModalStateType>(
+  (set) => ({
+    show: false,
+    form: null,
+    onShow: (form) => set({ show: true, form }),
+    onHide: () => set({ show: false, form: null }),
+  }),
+);
+
+export const useEditWithdrawModal = create<EditWithdrawModalStateType>(
+  (set) => ({
+    show: false,
+    form: null,
+    onShow: (form) => set({ show: true, form }),
+    onHide: () => set({ show: false, form: null }),
+  }),
+);

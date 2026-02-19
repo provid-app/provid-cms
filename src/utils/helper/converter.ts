@@ -5,11 +5,15 @@ export const convertNumberFormat = (value: number): string => {
   return value.toLocaleString("id-ID").replace(/\./g, ",");
 };
 
-export const convertNumberToCurrency = (value: number): string => {
+export const convertNumberToCurrency = (
+  value: number,
+  fraction: number = 0,
+): string => {
   const formatter = new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",
-    maximumFractionDigits: 0,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: fraction,
   });
 
   return formatter.format(value);

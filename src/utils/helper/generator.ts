@@ -56,6 +56,11 @@ export const generateBreadcrumb = (pathname: string) => {
         label: "Segmen",
       });
     }
+  } else if (pathname.includes("/reward")) {
+    breadcrumb.push({
+      dest: "/reward",
+      label: "Reward",
+    });
   }
 
   if (pathname.includes("/edit")) {

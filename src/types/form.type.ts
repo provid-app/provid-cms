@@ -17,10 +17,12 @@ export type InputType = {
     | "horizontal"
     | "number"
     | "textarea"
-    | "radiobox";
+    | "radiobox"
+    | "currency";
   name: string;
   label?: string;
   placeholder?: string;
+  extraPlaceholder?: string;
   required: boolean;
   dropdown?: DropdownType[];
   inputs?: InputType[];

@@ -24,6 +24,8 @@ import AddScheduleModal from "./AddScheduleModal";
 import { useConfirmationModal } from "@stores/modal.store";
 import useAuthController from "@controllers/auth.controller";
 import AddSegmentModal from "./AddSegmentModal";
+import EditRewardModal from "./EditRewardModal";
+import EditWithdrawModal from "./EditWithdrawModal";
 
 const AppLayout = () => {
   const [currentSub, setCurrentSub] = useState(0);
@@ -249,6 +251,8 @@ const AppLayout = () => {
       <MissionDetailModal />
       <ConfirmationModal />
       <AddSegmentModal />
+      <EditRewardModal />
+      <EditWithdrawModal />
     </Flex>
   );
 };

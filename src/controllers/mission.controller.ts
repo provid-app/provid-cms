@@ -14,6 +14,7 @@ import useSegmentController from "./segment.controller";
 import type { MissionDTO } from "@models/mission.model";
 import { useState } from "react";
 import { useToast } from "@stores/page.store";
+import type { DropdownType } from "types/form.type";
 
 const useMissionController = () => {
   const showMissionDetailModal = useMissionDetailModal((state) => state.onShow);
@@ -280,8 +281,24 @@ const useMissionController = () => {
     };
   };
 
+  const useGetMissionEstimationDropdownService = () => {
+    const mission = generateMission(10);
+
+    let finalData: DropdownType[] = [];
+
+    finalData = mission.map((item) => ({
+      label: item.mission_name,
+      value: item.reward.toString(),
+    }));
+
+    return {
+      finalData,
+    };
+  };
+
   return {
     useGetMissions,
+    useGetMissionEstimationDropdownService,
   };
 };
 

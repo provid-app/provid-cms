@@ -3,6 +3,10 @@ import type { DropdownType, FormType, MissionFormType } from "./form.type";
 import type { MissionDTO } from "@models/mission.model";
 import type { EditMissionInput } from "@utils/validator/mission.validator";
 import type { AddSegmentInput } from "@utils/validator/segment.validator";
+import type {
+  EditCoinValueInput,
+  EditWithdrawInput,
+} from "@utils/validator/reward.validator";
 
 export type AuthStateType = {
   token: string | null;
@@ -89,5 +93,19 @@ export type SegmentModalStateType = {
   type: "add" | "edit";
   form: FormType<AddSegmentInput> | null;
   onShow: (form: FormType<AddSegmentInput>, type: "add" | "edit") => void;
+  onHide: () => void;
+};
+
+export type EditCoinValueModalStateType = {
+  show: boolean;
+  form: FormType<EditCoinValueInput> | null;
+  onShow: (form: FormType<EditCoinValueInput>) => void;
+  onHide: () => void;
+};
+
+export type EditWithdrawModalStateType = {
+  show: boolean;
+  form: FormType<EditWithdrawInput> | null;
+  onShow: (form: FormType<EditWithdrawInput>) => void;
   onHide: () => void;
 };

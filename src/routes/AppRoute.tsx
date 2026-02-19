@@ -5,6 +5,7 @@ import {
   ManageMission,
   ManageSegment,
 } from "@pages/app/manage";
+import Reward from "@pages/app/Reward";
 import Ringkasan from "@pages/app/Ringkasan";
 import { Navigate, Route, Routes } from "react-router";
 
@@ -36,6 +37,7 @@ const AppRoute = () => {
         <Route path="/" element={<Ringkasan />} />
         <Route path="/analytic/*" element={<AnalyticRoute />} />
         <Route path="/manage/*" element={<ManageRoute />} />
+        <Route path="/reward" element={<Reward />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>

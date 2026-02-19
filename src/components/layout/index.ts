@@ -11,3 +11,6 @@ export { default as EditScheduleModal } from "./EditScheduleModal";
 export { default as ConfirmationModal } from "./ConfirmationModal";
 export { default as AddScheduleModal } from "./AddScheduleModal";
 export { default as AddSegmentModal } from "./AddSegmentModal";
+export { default as RewardPrediction } from "./RewardPrediction";
+export { default as EditRewardModal } from "./EditRewardModal";
+export { default as EditWithdrawModal } from "./EditWithdrawModal";

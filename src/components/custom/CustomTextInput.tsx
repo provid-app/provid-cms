@@ -8,7 +8,10 @@ import {
   IconEyeOff,
   IconLock,
 } from "@tabler/icons-react";
-import { convertNumberFormat } from "@utils/helper/converter";
+import {
+  convertNumberFormat,
+  convertNumberToCurrency,
+} from "@utils/helper/converter";
 import { Tooltip } from "react-tooltip";
 
 type Props = {
@@ -26,6 +29,22 @@ const CustomTextInput = ({ inputData, field, error }: Props) => {
     if (inputData.type === "number") {
       const clean = value.replace(/\D/g, "");
       field.onChange(clean);
+    } else if (inputData.type === "currency") {
+      let clean = value.replace(/[^0-9,]/g, "");
+
+      const parts = clean.split(",");
+
+      if (parts.length > 2) {
+        clean = parts[0] + "," + parts[1];
+      }
+
+      if (parts.length === 2) {
+        clean = parts[0] + "," + parts[1].slice(0, 2);
+      }
+
+      const numericValue = clean.replace(",", ".");
+
+      field.onChange(numericValue);
     } else {
       field.onChange(value);
     }
@@ -47,7 +66,9 @@ const CustomTextInput = ({ inputData, field, error }: Props) => {
           value={
             inputData.type === "number"
               ? convertNumberFormat(Number(field.value))
-              : field.value
+              : inputData.type === "currency"
+                ? convertNumberToCurrency(Number(field.value || 0), 2)
+                : field.value
           }
           type={
             inputData.type === "password"
@@ -81,17 +102,17 @@ const CustomTextInput = ({ inputData, field, error }: Props) => {
               <p className="text-body2">{inputData.label} tidak dapat diubah</p>
             </Tooltip>
           </>
-        ) : (
-          inputData.type === "password" && (
-            <button
-              type="button"
-              className="text-title cursor-pointer"
-              onClick={() => setShowPassword((prev) => !prev)}
-            >
-              {!showPassword ? <IconEyeOff size={20} /> : <IconEye size={20} />}
-            </button>
-          )
-        )}
+        ) : inputData.type === "password" ? (
+          <button
+            type="button"
+            className="text-title cursor-pointer"
+            onClick={() => setShowPassword((prev) => !prev)}
+          >
+            {!showPassword ? <IconEyeOff size={20} /> : <IconEye size={20} />}
+          </button>
+        ) : inputData.extraPlaceholder ? (
+          <p className="text-body2 text-text">{inputData.extraPlaceholder}</p>
+        ) : null}
       </Flex>
 
       {error && (

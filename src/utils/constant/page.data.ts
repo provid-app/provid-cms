@@ -1,4 +1,5 @@
 import {
+  IconAward,
   IconBell,
   IconChartPie,
   IconEdit,
@@ -69,6 +70,11 @@ export const sidebarData: SidebarType[] = [
         dest: "/segment",
       },
     ],
+  },
+  {
+    label: "Reward",
+    icon: IconAward,
+    dest: "/reward",
   },
   {
     label: "Transaksi",

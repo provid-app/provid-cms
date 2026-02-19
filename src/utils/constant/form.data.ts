@@ -1,6 +1,10 @@
 import type { LoginInput } from "@utils/validator/auth.validator";
 import type { AddCategoryInput } from "@utils/validator/category.validator";
 import type { EditMissionInput } from "@utils/validator/mission.validator";
+import type {
+  EditCoinValueInput,
+  EditWithdrawInput,
+} from "@utils/validator/reward.validator";
 import type { AddSegmentInput } from "@utils/validator/segment.validator";
 import type { FormType, MissionFormType } from "types/form.type";
 
@@ -241,5 +245,35 @@ export const addSegmentForm: FormType<AddSegmentInput> = {
     segment_name: "",
     description: "",
     layout: undefined,
+  },
+};
+
+export const editCoinValueForm: FormType<EditCoinValueInput> = {
+  inputs: [
+    {
+      type: "currency",
+      name: "coin_value",
+      label: "Nilai Rupiah",
+      placeholder: "0",
+      required: true,
+    },
+  ],
+  defaultValues: {
+    coin_value: "",
+  },
+};
+
+export const editWithdrawForm: FormType<EditWithdrawInput> = {
+  inputs: [
+    {
+      type: "currency",
+      name: "min_withdraw",
+      label: "Minimum Penarikan",
+      placeholder: "0",
+      required: true,
+    },
+  ],
+  defaultValues: {
+    min_withdraw: "",
   },
 };
