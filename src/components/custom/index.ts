@@ -20,3 +20,4 @@ export { default as Calendar } from "./Calendar";
 export { default as PaginationFooter } from "./PaginationFooter";
 export { default as CustomActionButton } from "./CustomActionButton";
 export { default as CustomDropdownEstimation } from "./CustomDropdownEstimation";
+export { default as DateRangeFilter } from "./DateRangeFilter";

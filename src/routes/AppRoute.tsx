@@ -7,6 +7,7 @@ import {
 } from "@pages/app/manage";
 import Reward from "@pages/app/Reward";
 import Ringkasan from "@pages/app/Ringkasan";
+import Transaction from "@pages/app/Transaction";
 import { Navigate, Route, Routes } from "react-router";
 
 const AnalyticRoute = () => {
@@ -38,6 +39,7 @@ const AppRoute = () => {
         <Route path="/analytic/*" element={<AnalyticRoute />} />
         <Route path="/manage/*" element={<ManageRoute />} />
         <Route path="/reward" element={<Reward />} />
+        <Route path="/transaction" element={<Transaction />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>

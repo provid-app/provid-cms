@@ -17,6 +17,10 @@
   --color-blue-second: var(--color-blue-second);
   --color-danger-primary: var(--color-danger-primary);
   --color-danger-main: var(--color-danger-main);
+  --color-danger-second: var(--color-danger-second);
+  --color-teal-primary: var(--color-teal-primary);
+  --color-teal-main: var(--color-teal-main);
+  --color-teal-second: var(--color-teal-second);
   --color-foreground: var(--color-foreground);
   --color-muted-foreground: var(--color-muted-foreground);
   --color-relative: var(--color-relative);
@@ -68,6 +72,10 @@
   --color-blue-second: #9fc3e8;
   --color-danger-primary: #d64848;
   --color-danger-main: #fbeded;
+  --color-danger-second: #efb6b6;
+  --color-teal-primary: #1fbccf;
+  --color-teal-main: #e9f9fa;
+  --color-teal-second: #a5e4ec;
   --color-foreground: #09090b;
   --color-muted-foreground: #71717a;
   --color-relative: #26303c;

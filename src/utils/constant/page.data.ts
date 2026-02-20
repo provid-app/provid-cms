@@ -160,3 +160,39 @@ export const segmentHeaderData: TableHeaderType = {
     },
   ],
 };
+
+export const transactionHeaderData: TableHeaderType = {
+  withAction: false,
+  withCheckbox: false,
+  header: [
+    {
+      label: "Tanggal",
+      type: "text",
+      sortable: "created_at",
+    },
+    {
+      label: "Nomor Penarikan",
+      type: "text",
+    },
+    {
+      label: "Pengguna",
+      type: "text",
+      sortable: "full_name",
+    },
+    {
+      label: "Nominal",
+      type: "text",
+      sortable: "nominal",
+    },
+    {
+      label: "Metode Penarikan",
+      type: "text",
+      sortable: "withdraw_method",
+    },
+    {
+      label: "Status",
+      type: "text",
+      sortable: "status",
+    },
+  ],
+};

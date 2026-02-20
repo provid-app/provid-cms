@@ -49,7 +49,9 @@ export type RowType = {
     | "coin"
     | "success"
     | "progress"
-    | "failed";
+    | "failed"
+    | "withdraw";
+  subLabel?: string;
   sortable?: string;
   onSwitch?: () => void;
 };

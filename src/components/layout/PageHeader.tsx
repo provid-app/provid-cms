@@ -1,4 +1,9 @@
-import { CustomButton, Flex, SearchInput } from "@components/custom";
+import {
+  CustomButton,
+  DateRangeFilter,
+  Flex,
+  SearchInput,
+} from "@components/custom";
 import PageFilter from "@components/custom/PageFilter";
 import { IconPlus, IconTrash } from "@tabler/icons-react";
 import type { FilterType } from "types/page.type";
@@ -8,6 +13,7 @@ type Props = {
   withDelete?: boolean;
   deleteCount?: number;
   filterData?: FilterType[];
+  dateRange?: { start: Date; end: Date };
   onClick?: () => void;
   onDelete?: () => void;
 };
@@ -17,6 +23,7 @@ const PageHeader = ({
   withDelete,
   deleteCount,
   filterData,
+  dateRange,
   onClick,
   onDelete,
 }: Props) => {
@@ -26,6 +33,8 @@ const PageHeader = ({
         <SearchInput />
 
         {filterData && <PageFilter filterData={filterData} />}
+
+        {dateRange && <DateRangeFilter dateRange={dateRange} />}
       </Flex>
 
       <Flex className="flex-row! items-center gap-2">

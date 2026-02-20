@@ -3,12 +3,17 @@ import { CustomActionButton, CustomSwitch, Flex } from "@components/custom";
 import {
   IconCalendarWeek,
   IconCheck,
+  IconCircleCheck,
   IconCircleDashed,
+  IconClock,
+  IconSelector,
   IconSend,
+  IconXboxX,
 } from "@tabler/icons-react";
 import type { TableBodyType, TableHeaderType } from "types/page.type";
 import * as CheckBox from "@radix-ui/react-checkbox";
 import { TableSkeleton } from "@components/skeleton";
+import ButtonFlex from "./ButtonFlex";
 
 type Props = {
   headerData: TableHeaderType;
@@ -49,10 +54,16 @@ const PageTable = ({ headerData, bodyData, isLoading, onSelectAll }: Props) => {
                   key={index.toString()}
                   className="px-4 py-[13.5px] border-b border-b-border"
                 >
-                  <Flex className="flex-row! items-center text-text">
+                  <Flex className="flex-row! items-center text-text gap-2">
                     <p className="text-caption font-semibold text-left truncate">
                       {item.label}
                     </p>
+
+                    {item.sortable && (
+                      <ButtonFlex className="size-4 text-text hover:bg-border transition-colors duration-300 rounded-sm">
+                        <IconSelector size={12} />
+                      </ButtonFlex>
+                    )}
                   </Flex>
                 </th>
               ))}
@@ -106,17 +117,31 @@ const PageTable = ({ headerData, bodyData, isLoading, onSelectAll }: Props) => {
 
                         <p className="text-body2 text-title">{item2.label}</p>
                       </Flex>
+                    ) : item2.type === "withdraw" ? (
+                      <Flex className="gap-2">
+                        <p className="text-body2 text-title">{item2.label}</p>
+
+                        <p className="text-caption text-text">
+                          {item2.subLabel}
+                        </p>
+                      </Flex>
                     ) : (
                       <Flex className="items-start">
                         <Flex
-                          className={`flex-row! items-center gap-2 px-2 py-1 border rounded-[5px] ${item2.type === "publish" ? "text-primary bg-brand-main border-brand-second" : item2.type === "arrange" ? "text-blue-primary bg-blue-main border-blue-second" : "text-text bg-second border-border"}`}
+                          className={`flex-row! items-center gap-2 px-2 py-1 border rounded-[5px] ${item2.type === "publish" ? "text-primary bg-brand-main border-brand-second" : item2.type === "arrange" || item2.type === "success" ? "text-blue-primary bg-blue-main border-blue-second" : item2.type === "draft" ? "text-text bg-second border-border" : item2.type === "progress" ? "text-teal-primary bg-teal-main border-teal-second" : "text-danger-primary bg-danger-main border-danger-second"}`}
                         >
                           {item2.type === "publish" ? (
                             <IconSend size={16} />
                           ) : item2.type === "arrange" ? (
                             <IconCalendarWeek size={16} />
-                          ) : (
+                          ) : item2.type === "draft" ? (
                             <IconCircleDashed size={16} />
+                          ) : item2.type === "success" ? (
+                            <IconCircleCheck size={16} />
+                          ) : item2.type === "progress" ? (
+                            <IconClock size={16} />
+                          ) : (
+                            <IconXboxX size={16} />
                           )}
 
                           <p className="text-body2 font-semibold">
