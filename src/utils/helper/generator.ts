@@ -61,6 +61,16 @@ export const generateBreadcrumb = (pathname: string) => {
       dest: "/reward",
       label: "Reward",
     });
+  } else if (pathname.includes("/transaction")) {
+    breadcrumb.push({
+      dest: "/transaction",
+      label: "Transaksi",
+    });
+  } else if (pathname.includes("/notif")) {
+    breadcrumb.push({
+      dest: "/notif",
+      label: "Notifikasi",
+    });
   }
 
   if (pathname.includes("/edit")) {

@@ -84,7 +84,7 @@ export const sidebarData: SidebarType[] = [
   {
     label: "Notifikasi",
     icon: IconBell,
-    dest: "/notification",
+    dest: "/notif",
   },
 ];
 

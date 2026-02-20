@@ -5,6 +5,7 @@ import {
   ManageMission,
   ManageSegment,
 } from "@pages/app/manage";
+import Notification from "@pages/app/Notification";
 import Reward from "@pages/app/Reward";
 import Ringkasan from "@pages/app/Ringkasan";
 import Transaction from "@pages/app/Transaction";
@@ -40,6 +41,7 @@ const AppRoute = () => {
         <Route path="/manage/*" element={<ManageRoute />} />
         <Route path="/reward" element={<Reward />} />
         <Route path="/transaction" element={<Transaction />} />
+        <Route path="/notif" element={<Notification />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>
