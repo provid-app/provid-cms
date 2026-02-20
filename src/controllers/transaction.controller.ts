@@ -155,6 +155,7 @@ const useTransactionController = () => {
       finalData,
       filterData,
       dateRange,
+      setDateRange,
     };
   };
 
